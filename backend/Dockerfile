@@ -2,30 +2,30 @@
 FROM pbaumgartner/graph-tool-pip
 
 # set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
-ENV USER flask
-ENV WORKDIR /opt/app
+ENV APP_USER=backend
+ENV APP_DIR=/opt/app
 
 # set work directory
-WORKDIR ${WORKDIR}
+WORKDIR ${APP_DIR}
 
 # update pip and install dependencies
 RUN pip install --upgrade pip
-COPY ./requirements.txt /tmp/requirements.txt
-RUN pip install -r /tmp/requirements.txt
+RUN --mount=source=./requirements.txt,target=/tmp/requirements.txt \
+    pip install -r /tmp/requirements.txt
 
 # copy project source to container
-COPY . /opt/app
+COPY . ${APP_DIR}
 
 # create user
-RUN groupadd ${USER} && useradd -g ${USER} ${USER}
+RUN groupadd ${APP_USER} && useradd -g ${APP_USER} ${APP_USER}
 
 # setup project owner and permissions
-RUN chown -R ${USER}:${USER} ${WORKDIR}
-RUN chmod -R u=rwx,g=rwx ${WORKDIR}
+RUN chown -R ${APP_USER}:${APP_USER} ${APP_DIR}
+RUN chmod -R u=rwx,g=rwx ${APP_DIR}
 
 # change container user
-USER ${USER}
+USER ${APP_USER}
 
