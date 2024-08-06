@@ -17,8 +17,11 @@ def main():
     # Port of debug server
     SERVER_PORT = os.environ.get('SERVER_PORT', default=5000)
 
+    # Debug server host
+    SERVER_HOST = os.environ.get('SERVER_HOST', default='127.0.0.1')
+
     api = create_app(None)
-    api.run(port=cast(int, SERVER_PORT), debug=True)
+    api.run(host=SERVER_HOST, port=cast(int, SERVER_PORT), debug=True)
 
 
 if __name__ == '__main__':
