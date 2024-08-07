@@ -16,20 +16,11 @@ def main():
     SERVER_RUN = os.environ.get('SERVER_RUN', default='dev')
     SERVER_PORT = os.environ.get('SERVER_PORT', default=5000)
 
-    if SERVER_RUN == 'dev':
-        # When on dev environment "listening" on all interfaces by default,
-        # particularly useful when running on a container.
-        SERVER_HOST = os.environ.get('SERVER_HOST', default='0.0.0.0')
-    elif SERVER_RUN == 'prod':
-        SERVER_HOST = os.environ.get('SERVER_HOST', default='127.0.0.1')
-    else:
-        return
-
     # API
     api = create_app(None)
 
     if SERVER_RUN == 'dev':
-        api.run(host=SERVER_HOST, port=cast(int, SERVER_PORT), debug=True)
+        api.run(host='0.0.0.0', port=cast(int, SERVER_PORT), debug=True)
     elif SERVER_RUN == 'prod':
         from multiprocessing import cpu_count
         from gunicorn.app.base import BaseApplication
@@ -50,7 +41,7 @@ def main():
                 return self.app
 
         GunicornApp(api, {
-            'bind': f'{SERVER_HOST}:{SERVER_PORT}',
+            'bind': f'0.0.0.0:{SERVER_PORT}',
             'workers': (cpu_count() * 1) + 1,
         }).run()
     else:

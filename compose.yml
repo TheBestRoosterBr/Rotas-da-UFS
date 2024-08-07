@@ -11,5 +11,6 @@ services:
     volumes:
       - ./backend:/opt/app
     restart: unless-stopped
+    container_name: backend
 
 # vim: ft=yaml.docker-compose
