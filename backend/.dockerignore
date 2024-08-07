@@ -4,7 +4,7 @@
 # Ignore some instance files
 **/instance/
 
-# No cache on repository 🙏
+# No cache on container 🙏
 **/__pycache__/
 
 # Environment files
