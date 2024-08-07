@@ -17,7 +17,8 @@ RUN --mount=source=./requirements.txt,target=/tmp/requirements.txt \
     pip install -r /tmp/requirements.txt
 
 # copy project source to container
-COPY . ${APP_DIR}
+COPY ./api ${APP_DIR}/api
+COPY ./server.py ${APP_DIR}
 
 # create user
 RUN groupadd ${APP_USER} && useradd -g ${APP_USER} ${APP_USER}
