@@ -30,3 +30,10 @@ RUN chmod -R u=rwx,g=rwx ${APP_DIR}
 # change container user
 USER ${APP_USER}
 
+# setup entry point
+COPY ./entry.sh /tmp/entry.sh
+ENTRYPOINT [ "/tmp/entry.sh" ]
+
+# by default run the back-end server
+CMD [ "/usr/bin/python", "server.py" ]
+
