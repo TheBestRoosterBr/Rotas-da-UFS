@@ -1,13 +1,25 @@
 services:
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    env_file:
+      - path: ./backend/.env
+        required: true
+    depends_on:
+      - backend
+    restart: unless-stopped
+    container_name: web
+
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    ports:
-      - "5000:5000"
     env_file:
       - path: ./backend/.env
-        required: false
+        required: true
     volumes:
       - ./backend:/opt/app
     restart: unless-stopped
