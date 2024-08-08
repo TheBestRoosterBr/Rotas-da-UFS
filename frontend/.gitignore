@@ -1,0 +1,9 @@
+# Node modules
+node_modules/
+
+# Build artifacts
+build/
+
+# dotenv environment variables file
+.env*
+
