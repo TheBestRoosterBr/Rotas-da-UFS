@@ -1,5 +1,5 @@
-# pull base image (graph-tool 🤮)
-FROM pbaumgartner/graph-tool-pip
+# pull base image
+FROM debian:stable-slim
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -10,6 +10,16 @@ ENV APP_DIR=/opt/app
 
 # set work directory
 WORKDIR ${APP_DIR}
+
+# install python and dependencies
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y \
+        python3-minimal \
+        python3-pip \
+        python3-graph-tool \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /usr/lib/python3.11/EXTERNALLY-MANAGED
 
 # update pip and install dependencies
 RUN pip install --upgrade pip
@@ -31,5 +41,5 @@ RUN chmod -R u=rwx,g=rwx ${APP_DIR}
 USER ${APP_USER}
 
 # by default run the back-end server
-CMD [ "/usr/bin/python", "server.py" ]
+CMD [ "/usr/bin/python3", "server.py" ]
 
