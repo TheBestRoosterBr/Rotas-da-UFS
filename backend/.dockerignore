@@ -1,0 +1,18 @@
+# Virtual environment
+**/.venv
+
+# Ignore some instance files
+**/instance/
+
+# No cache on container 🙏
+**/__pycache__/
+
+# Environment files
+**/.env*
+
+# Git files
+**/.gitignore
+
+# Ignore any ReadMe file
+**/README*
+

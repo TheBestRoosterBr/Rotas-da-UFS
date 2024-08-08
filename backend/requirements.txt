@@ -1,0 +1,9 @@
+# Web framework
+Flask>=3.0.3
+
+# WSGI HTTP Server
+gunicorn>=22.0.0
+
+# Load environment variables from .env file(s)
+python-dotenv>=1.0.1
+
