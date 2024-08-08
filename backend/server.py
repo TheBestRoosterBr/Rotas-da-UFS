@@ -13,8 +13,8 @@ def main():
         load_dotenv('.env')
 
     # Server configuration environment variables
-    SERVER_RUN = os.environ.get('SERVER_RUN', default='dev')
-    SERVER_PORT = os.environ.get('SERVER_PORT', default=5000)
+    SERVER_RUN = os.environ.get('BACKEND_RUN', default='dev')
+    SERVER_PORT = os.environ.get('BACKEND_PORT', default=5000)
 
     # API
     api = create_app(None)

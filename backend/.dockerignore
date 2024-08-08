@@ -13,3 +13,6 @@
 # Git files
 **/.gitignore
 
+# Ignore any ReadMe file
+**/README*
+
