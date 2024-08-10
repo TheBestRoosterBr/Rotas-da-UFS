@@ -9,7 +9,7 @@ Neste sentido o objetivo principal é dado um ponto de partida encontrar o melho
 
 ## Metodologia
 
-Para atingir o objetivo proposto, foi utilizado o algoritmo de Dijkstra para encontrar o menor caminho entre dois pontos. O algoritmo de Dijkstra é um algoritmo de busca em grafos que calcula o caminho mais curto de um vértice a todos os outros vértices em um grafo com arestas de peso não negativo. 
+Para atingir o objetivo proposto, foram utilizados diversos algoritmos de busca como A*, busca em largura, busca em profundidade, custo uniforme e gulosa pela melhor escolha.
 
 O grafo foi construído usando medidas reais que transcrevem a experiência real de um estudante que deseja se locomover no campus de Itabaiana da UFS.
 
