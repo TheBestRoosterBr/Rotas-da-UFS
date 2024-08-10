@@ -1,4 +1,5 @@
 import {
+    MapPin,
     Moon,
     Sun
 } from '@phosphor-icons/react';
@@ -13,6 +14,8 @@ export function HomePage(): ReactNode {
     const [theme, setTheme] = useState<string>(
         localStorage.getItem('themeMode') ?? 'dark'
     );
+
+    const [startLocation, setStartLocation] = useState<number>(0);
 
     function changeTheme(): void {
         const newTheme: string = theme == 'dark' ? 'light' : 'dark';
@@ -42,8 +45,35 @@ export function HomePage(): ReactNode {
             </nav>
 
             {/* Main content */}
-            <main>
+            <main className='h-screen flex items-center justify-center'>
+                <div className='max-w-3xl w-full px-6 text-center space-y-10'>
+                    <div className='space-y-1'>
+                        <p className='dark:text-zinc-300 text-lg italic'>
+                            “Se você não sabe aonde quer ir, qualquer caminho serve”
+                        </p>
+                        <p className='dark:text-zinc-300 text-lg'>
+                            Mas nós te ajudamos a chegar lá —&nbsp;&nbsp;Rotas UFS
+                        </p>
+                    </div>
 
+                    {/* Inputs */}
+                    <div className='space-y-4'>
+                        {/* Input for current location */}
+                        <div className='dark:bg-zinc-900 h-16 px-4 rounded-xl shadow-shadow flex items-center gap-3'>
+                            <button
+                                disabled={startLocation > 0}
+                                className='flex items-center gap-2 flex-1'>
+                                <MapPin
+                                    className='size-5 dark:text-zinc-400'/>
+
+                                <span
+                                    className='dark:text-zinc-400 text-lg'>
+                                    Onde você está?
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </main>
         </>
     );
