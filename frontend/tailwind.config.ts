@@ -10,6 +10,7 @@ export default {
         './src/**/*.ts',
         './src/**/*.tsx',
     ],
+    darkMode: 'selector',
     theme: {
         extend: {
             fontFamily: {
