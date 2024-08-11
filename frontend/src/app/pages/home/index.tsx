@@ -84,6 +84,7 @@ export function HomePage(): ReactNode {
                             )}
                         </div>
 
+                        {/* Input for destination location */}
                         {startLocation > 0 && (
                             <div className='dark:bg-zinc-900 h-16 px-4 rounded-xl shadow-shadow flex items-center justify-between gap-3'>
                                 <button
