@@ -7,8 +7,6 @@ from backend.graphToolsVol2.BuscaEmProfundidade import BuscaEmProfundidade
 from backend.graphToolsVol2.BuscaEmLargura import BuscaEmLargura
 
 
-
-
 router = Blueprint('busca', __name__, url_prefix='/busca')
 
 PATH_MAPA = '../Mapa/mapa.jff'
@@ -32,7 +30,8 @@ def busca_a_estrela():
     inicio = next((estado for estado in estados if estado.id == inicio), None)
     fim = next((estado for estado in estados if estado.id == fim), None)
     busca.busca(reader.graph, inicio, fim)
-    return jsonify({'caminho': [estado.id for estado in busca.caminho]})
+    return jsonify({'caminho': [estado.id for estado in busca.caminho]}, {'custo': busca.custo},
+                   {'ordem_expansao': [estado.id for estado in busca.ordem_expansao_nodos()]})
 
 
 @router.route('/busca_em_profundidade', methods=['POST'])
@@ -46,7 +45,8 @@ def busca_em_profundidade():
     inicio = next((estado for estado in estados if estado.id == inicio), None)
     fim = next((estado for estado in estados if estado.id == fim), None)
     busca.busca(reader.graph, inicio, fim)
-    return jsonify({'caminho': [estado.id for estado in busca.caminho]})
+    return jsonify({'caminho': [estado.id for estado in busca.caminho]},
+                   {'ordem_expansao': [estado.id for estado in busca.ordem_expansao_nodos()]})
 
 
 @router.route('/busca_em_largura', methods=['POST'])
@@ -60,4 +60,5 @@ def busca_em_largura():
     inicio = next((estado for estado in estados if estado.id == inicio), None)
     fim = next((estado for estado in estados if estado.id == fim), None)
     busca.busca(reader.graph, inicio, fim)
-    return jsonify({'caminho': [estado.id for estado in busca.caminho]})
+    return jsonify({'caminho': [estado.id for estado in busca.caminho]},
+                   {'ordem_expansao': [estado.id for estado in busca.ordem_expansao_nodos()]})
