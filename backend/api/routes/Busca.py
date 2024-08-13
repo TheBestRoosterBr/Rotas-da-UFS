@@ -29,10 +29,10 @@ def busca_a_estrela():
     reader = Reader(PATH_MAPA)
     busca = BuscaAEstrela()
     estados = reader.estados
-    inicio = next((estado for estado in estados if estado.nome == inicio), None)
-    fim = next((estado for estado in estados if estado.nome == fim), None)
+    inicio = next((estado for estado in estados if estado.id == inicio), None)
+    fim = next((estado for estado in estados if estado.id == fim), None)
     busca.busca(reader.graph, inicio, fim)
-    return jsonify({'caminho': [estado.nome for estado in busca.caminho]})
+    return jsonify({'caminho': [estado.id for estado in busca.caminho]})
 
 
 @router.route('/busca_em_profundidade', methods=['POST'])
@@ -43,10 +43,10 @@ def busca_em_profundidade():
     reader = Reader(PATH_MAPA)
     busca = BuscaEmProfundidade()
     estados = reader.estados
-    inicio = next((estado for estado in estados if estado.nome == inicio), None)
-    fim = next((estado for estado in estados if estado.nome == fim), None)
+    inicio = next((estado for estado in estados if estado.id == inicio), None)
+    fim = next((estado for estado in estados if estado.id == fim), None)
     busca.busca(reader.graph, inicio, fim)
-    return jsonify({'caminho': [estado.nome for estado in busca.caminho]})
+    return jsonify({'caminho': [estado.id for estado in busca.caminho]})
 
 
 @router.route('/busca_em_largura', methods=['POST'])
@@ -57,7 +57,7 @@ def busca_em_largura():
     reader = Reader(PATH_MAPA)
     busca = BuscaEmLargura()
     estados = reader.estados
-    inicio = next((estado for estado in estados if estado.nome == inicio), None)
-    fim = next((estado for estado in estados if estado.nome == fim), None)
+    inicio = next((estado for estado in estados if estado.id == inicio), None)
+    fim = next((estado for estado in estados if estado.id == fim), None)
     busca.busca(reader.graph, inicio, fim)
-    return jsonify({'caminho': [estado.nome for estado in busca.caminho]})
+    return jsonify({'caminho': [estado.id for estado in busca.caminho]})

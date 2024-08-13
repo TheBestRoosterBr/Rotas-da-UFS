@@ -28,3 +28,6 @@ class BuscaEmLargura:
                     self.visitados.add(transicao.destino)
                     pai[transicao.destino] = estado_atual
         return None
+
+    def ordem_expansao_nodos(self):
+        return self.visitados

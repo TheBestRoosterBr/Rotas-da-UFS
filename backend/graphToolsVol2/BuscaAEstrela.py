@@ -41,3 +41,6 @@ class BuscaAEstrela:
             return self.caminho
         else:
             return None
+
+    def ordem_expansao_nodos(self):
+        return self.visitados

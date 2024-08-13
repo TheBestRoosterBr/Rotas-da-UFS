@@ -18,3 +18,7 @@ class BuscaEmProfundidade:
 
         self.caminho.pop()
         return None
+
+    def ordem_expansao_nodos(self):
+        return self.visitados
+
