@@ -6,7 +6,6 @@ from backend.graphToolsVol2.BuscaAEstrela import BuscaAEstrela
 from backend.graphToolsVol2.BuscaEmProfundidade import BuscaEmProfundidade
 from backend.graphToolsVol2.BuscaEmLargura import BuscaEmLargura
 
-
 router = Blueprint('busca', __name__, url_prefix='/busca')
 
 PATH_MAPA = '../Mapa/mapa.jff'
@@ -17,6 +16,14 @@ def get_estados():
     reader = Reader(PATH_MAPA)
     estados = reader.estados
     return jsonify({'estados': [{'id': estado.id, 'nome': estado.nome} for estado in estados]})
+
+
+@router.route('/get_transicoes', methods=['GET'])
+def get_transicoes():
+    reader = Reader(PATH_MAPA)
+    transicoes = reader.transicoes
+    return jsonify({'transicoes': [{'origem': transicao.origem.id, 'destino': transicao.destino.id,
+                                    'distancia': transicao.distancia} for transicao in transicoes]})
 
 
 @router.route('/busca_a_estrela', methods=['POST'])
