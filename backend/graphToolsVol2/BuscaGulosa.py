@@ -4,4 +4,3 @@ class BuscaGulosa:
 
     def buscar(self, grafo, inicio, fim):
         pass
-    

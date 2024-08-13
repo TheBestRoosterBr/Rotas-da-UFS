@@ -6,5 +6,3 @@ class Grafo:
         if transicoes is None:
             transicoes = []
         self.transicoes = transicoes
-
-

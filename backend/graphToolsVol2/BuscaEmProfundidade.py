@@ -8,7 +8,7 @@ class BuscaEmProfundidade:
         self.caminho.append(inicio)
 
         if inicio == fim:
-            return self.caminho  
+            return self.caminho
 
         for transicao in grafo.transicoes:
             if transicao.origem == inicio and transicao.destino not in self.visitados:

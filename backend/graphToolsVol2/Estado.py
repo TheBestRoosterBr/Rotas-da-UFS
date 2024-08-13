@@ -9,4 +9,3 @@ class Estado:
 
     def visit(self, visitor):
         visitor.visit(self)
-

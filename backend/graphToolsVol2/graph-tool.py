@@ -1,5 +1,5 @@
-from Reader import Reader
 from BuscaAEstrela import BuscaAEstrela
+from Reader import Reader
 
 
 class GraphTool:

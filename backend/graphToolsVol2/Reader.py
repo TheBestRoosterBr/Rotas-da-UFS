@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
-from Estado import *
-from Transicao import *
-from Grafo import *
+from backend.graphToolsVol2.Estado import Estado
+from backend.graphToolsVol2.Grafo import Grafo
+from backend.graphToolsVol2.Transicao import Transicao
 
 
 class Reader:

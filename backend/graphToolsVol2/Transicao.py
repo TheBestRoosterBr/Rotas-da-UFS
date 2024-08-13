@@ -3,5 +3,3 @@ class Transicao:
         self.origem = origem
         self.destino = destino
         self.distancia = distancia
-    
-    
