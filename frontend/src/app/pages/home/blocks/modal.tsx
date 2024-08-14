@@ -94,8 +94,11 @@ export function Modal(props: ModalProps) {
                         </div>
 
                         {/* Locations */}
-                        {/* TODO: scrollable list */}
-                        <div className='flex flex-col space-y-2 overflow-y-auto'>
+                        {/* Scrollable list note: the better solution found was
+                          * define a fixed max height for the list without this
+                          * the list will overflow the modal height.
+                          */}
+                        <div className='flex flex-1 flex-col max-h-56 space-y-2 overflow-y-auto'>
                             {props.locations.map((location) => {
                                 if (selectedLocation !== null
                                         && location.id === selectedLocation.id)
