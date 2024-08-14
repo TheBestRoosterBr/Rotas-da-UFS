@@ -14,7 +14,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: 'Inter',
+                sans: 'JetBrains Mono',
             },
 
             boxShadow: {
