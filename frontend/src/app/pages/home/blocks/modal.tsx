@@ -6,7 +6,11 @@ import {
     X
 } from '@phosphor-icons/react';
 
-import { useMemo, useState } from 'react';
+import {
+    useMemo,
+    useState,
+    useTransition
+} from 'react';
 
 import { levenshtein } from '@/utils';
 
@@ -32,6 +36,8 @@ export function Modal(props: ModalProps) {
     const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
     const [search, setSearch] = useState<string>('');
 
+    const [isLoadingLocation, startLoadLocation] = useTransition();
+
     const locations = useMemo(() => {
         return [...props.locations].sort((a, b) => {
             return levenshtein(search, a.name) - levenshtein(b.name, search)
@@ -54,7 +60,7 @@ export function Modal(props: ModalProps) {
                     </span>
                     <button
                         onClick={props.onClose}
-                        className='p-1 bg-zinc-800 rounded-full'>
+                        className='flex items-center justify-center p-1 bg-zinc-800 rounded-full'>
                         <X
                             className='size-5 text-zinc-400' />
                     </button>
@@ -151,20 +157,18 @@ export function Modal(props: ModalProps) {
                     </div>
 
                     {/* Vertical separator */}
-                    <div
-                        className='w-px h-72 my-auto bg-zinc-600'
-                        />
+                    <div className='w-px h-72 my-auto bg-zinc-600' />
 
                     {/* Preview column */}
-                    {selectedLocation !== null && false ? (
+                    {selectedLocation !== null ? (
                         <div className='flex flex-1 h-full flex-col items-center'>
                             {/* Location informations */}
                             <div className='flex flex-1 h-full flex-col items-center space-y-1.5'>
                                 {/* Location image */}
                                 <div className='w-56 h-44 bg-zinc-400' />
 
-                                <div
-                                    className='w-48 h-px bg-zinc-600' />
+                                {/* Horizontal separator */}
+                                <div className='w-48 h-px bg-zinc-600' />
 
                                 {/* Location tile & description */}
                                 <div className='w-full text-zinc-300 text-sm space-y-2'>
@@ -173,7 +177,7 @@ export function Modal(props: ModalProps) {
                                     </span>
 
                                     {selectedLocation.description !== undefined && (
-                                        <pre className='h-28 text-justify overflow-y-auto'>
+                                        <pre className='h-28 text-wrap overflow-y-auto'>
                                             {selectedLocation.description}
                                         </pre>
                                     )}
