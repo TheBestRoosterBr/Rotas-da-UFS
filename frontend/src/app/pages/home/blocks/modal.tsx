@@ -42,7 +42,7 @@ export function Modal(props: ModalProps) {
                 </div>
 
                 {/* Content row */}
-                <div className='flex space-x-4'>
+                <div className='flex h-full space-x-4'>
                     {/* Locations column */}
                     <div className='space-y-6'>
                         {/* Search & Filter & Selected location */}
@@ -114,7 +114,6 @@ export function Modal(props: ModalProps) {
                     </div>
 
                     {/* Vertical separator */}
-                    {/* TODO: expand separator to full height */}
                     <div
                         className='w-px h-full bg-zinc-600'
                         />
