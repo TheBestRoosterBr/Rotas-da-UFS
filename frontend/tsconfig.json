@@ -44,6 +44,10 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "useUnknownInCatchVariables": true,
+
+        "paths": {
+            "@/*": [ "src/app/*" ]
+        }
     },
 
     "include": [

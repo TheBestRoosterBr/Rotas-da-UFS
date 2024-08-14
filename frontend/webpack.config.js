@@ -26,7 +26,11 @@ const config = {
         roots: [
             __dirname,
             path.resolve(__dirname, 'static')
-        ]
+        ],
+
+        alias: {
+            '@': path.resolve(__dirname, path.join('src', 'app')),
+        },
     },
 
     module: {

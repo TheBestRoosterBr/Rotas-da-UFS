@@ -4,7 +4,9 @@ import {
     X
 } from '@phosphor-icons/react';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+
+import { levenshtein } from '@/utils';
 
 
 interface Location {
@@ -23,6 +25,12 @@ interface ModalProps {
 export function Modal(props: ModalProps) {
     const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
     const [search, setSearch] = useState<string>('');
+
+    const locations = useMemo(() => {
+        return [...props.locations].sort((a, b) => {
+            return levenshtein(search, a.name) - levenshtein(b.name, search)
+        })
+    }, [search, props.locations]);
 
     return (
         <div className='fixed inset-0 bg-black/80 flex justify-center items-center'>
@@ -99,7 +107,7 @@ export function Modal(props: ModalProps) {
                           * the list will overflow the modal height.
                           */}
                         <div className='flex flex-1 flex-col max-h-56 space-y-2 overflow-y-auto'>
-                            {props.locations.map((location) => {
+                            {locations.map((location) => {
                                 if (selectedLocation !== null
                                         && location.id === selectedLocation.id)
                                     return null;
