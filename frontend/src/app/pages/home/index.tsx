@@ -28,6 +28,7 @@ export function HomePage(): ReactNode {
 
     // Per-modal
     const [location, setLocation] = useState<Location | null>(null);
+    const [search, setSearch] = useState<string>('');
 
     // Window states
     const [whereLocation, setWhereLocation] = useState<number>(0);
@@ -168,12 +169,20 @@ export function HomePage(): ReactNode {
                                         <div className='flex items-center h-8 space-x-2 p-[10px] rounded-lg dark:bg-zinc-800'>
                                             <input
                                                 type='text'
+                                                value={search}
+                                                onChange={(e) => setSearch(e.target.value)}
                                                 placeholder='Procurar local...'
                                                 className='min-w-52 text-sm bg-transparent outline-none text-zinc-300 placeholder:text-zinc-300'
                                                 />
 
-                                            <MagnifyingGlass
-                                                className='size-6 text-zinc-300' />
+                                            {search === '' ? (
+                                                <MagnifyingGlass
+                                                    className='size-6 text-zinc-300' />
+                                            ) : (
+                                                <X
+                                                    onClick={() => setSearch('')}
+                                                    className='cursor-pointer size-6 text-zinc-300' />
+                                            )}
                                         </div>
 
                                         {/* Filter button */}
