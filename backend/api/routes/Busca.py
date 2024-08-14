@@ -25,6 +25,15 @@ def get_transicoes():
     return jsonify({'transicoes': [{'origem': transicao.origem.id, 'destino': transicao.destino.id,
                                     'distancia': transicao.distancia} for transicao in transicoes]})
 
+#crie uma nova rota get que recebe o id de um estado e retorna a descricao desse estado
+@router.route('/get_estado', methods=['GET'])
+def get_estado():
+    id = request.args.get('id')
+    reader = Reader(PATH_MAPA)
+    estado = reader.get_estado(id)
+    return jsonify({'estado': {'id': estado.id, 'nome': estado.nome,
+                               'image_path': "../imagens/" + estado.nome + ".png"}})
+
 
 @router.route('/busca_a_estrela', methods=['POST'])
 def busca_a_estrela():
