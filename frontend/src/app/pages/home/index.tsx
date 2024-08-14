@@ -1,18 +1,17 @@
 import {
     ArrowRight,
-    Funnel,
-    MagnifyingGlass,
     MapPin,
     Moon,
     Sun,
-    Swap,
-    X
+    Swap
 } from '@phosphor-icons/react';
 
 import {
     ReactNode,
     useState
 } from 'react';
+
+import { Modal } from './blocks/modal';
 
 
 interface Location {
@@ -26,11 +25,6 @@ export function HomePage(): ReactNode {
         localStorage.getItem('themeMode') ?? 'dark'
     );
 
-    // Per-modal
-    const [location, setLocation] = useState<Location | null>(null);
-    const [search, setSearch] = useState<string>('');
-
-    // Window states
     const [whereLocation, setWhereLocation] = useState<number>(0);
     const [isWhereModelOpen, setWhereModalOpen] = useState<boolean>(true);
 
@@ -93,7 +87,8 @@ export function HomePage(): ReactNode {
                         {/* Input for current location */}
                         <div className='dark:bg-zinc-900 h-16 px-4 rounded-xl shadow-shadow flex items-center gap-3'>
                             <button
-                                disabled={startLocation > 0}
+                                disabled={whereLocation > 0}
+                                onClick={() => setWhereModalOpen(true)}
                                 className='flex items-center gap-2 flex-1'>
                                 <MapPin
                                     className='size-5 dark:text-zinc-400'/>
@@ -104,7 +99,7 @@ export function HomePage(): ReactNode {
                                 </span>
                             </button>
 
-                            {startLocation > 0 && (
+                            {whereLocation > 0 && (
                                 <button
                                     className='shadow-shadow hover:bg-zinc-200 dark:text-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-600 px-5 py-2 font-medium flex items-center gap-2 rounded-lg'>
                                     Alterar local
@@ -115,7 +110,7 @@ export function HomePage(): ReactNode {
                         </div>
 
                         {/* Input for destination location */}
-                        {startLocation > 0 && (
+                        {whereLocation > 0 && (
                             <div className='dark:bg-zinc-900 h-16 px-4 rounded-xl shadow-shadow flex items-center justify-between gap-3'>
                                 <button
                                     className='flex items-center gap-2 flex-1'>
@@ -141,106 +136,11 @@ export function HomePage(): ReactNode {
             </main>
 
             {isWhereModelOpen && (
-                <div className='fixed inset-0 bg-black/80 flex justify-center items-center'>
-                    {/* Modal window */}
-                    <div className='flex flex-col w-[720px] h-96 bg-zinc-900 px-6 py-5 rounded-xl space-y-5'>
-                        {/* Title row */}
-                        <div className="flex items-center justify-between">
-                            <span className='text-lg text-zinc-300 font-semibold'>
-                                Nós diga onde você está
-                            </span>
-                            <button
-                                onClick={() => setWhereModalOpen(false)}
-                                className='p-1 bg-zinc-800 rounded-full'>
-                                <X
-                                    className='size-5 text-zinc-400' />
-                            </button>
-                        </div>
+                <Modal
+                    onClose={() => setWhereModalOpen(false)}
+                    onSelect={(location) => setWhereLocation(location.id)}
 
-                        {/* Content row */}
-                        <div className='flex space-x-4'>
-                            {/* Locations column */}
-                            <div className='space-y-6'>
-                                {/* Search & Filter & Selected location */}
-                                <div className='space-y-3'>
-                                    {/* Search & Filter */}
-                                    <div className='flex flex-row space-x-2 items-center justify-center'>
-                                        {/* Search input */}
-                                        <div className='flex items-center h-8 space-x-2 p-[10px] rounded-lg dark:bg-zinc-800'>
-                                            <input
-                                                type='text'
-                                                value={search}
-                                                onChange={(e) => setSearch(e.target.value)}
-                                                placeholder='Procurar local...'
-                                                className='min-w-52 text-sm bg-transparent outline-none text-zinc-300 placeholder:text-zinc-300'
-                                                />
-
-                                            {search === '' ? (
-                                                <MagnifyingGlass
-                                                    className='size-6 text-zinc-300' />
-                                            ) : (
-                                                <X
-                                                    onClick={() => setSearch('')}
-                                                    className='cursor-pointer size-6 text-zinc-300' />
-                                            )}
-                                        </div>
-
-                                        {/* Filter button */}
-                                        <button
-                                            className='p-1 bg-zinc-800 rounded-lg'>
-                                            <Funnel
-                                                className='size-6 text-zinc-300' />
-                                        </button>
-                                    </div>
-
-                                    {location !== null && (
-                                        <div
-                                            key={location.id}
-                                            className='flex item-center justify-between rounded-lg px-4 py-1 h-8 text-start  dark:bg-cyan-300'>
-                                            {location.name}
-
-                                            <button
-                                                onClick={() => setLocation(null)}
-                                                className=''>
-                                                <X
-                                                    className='size-5 text-cyan-950' />
-                                            </button>
-                                        </div>
-                                    )}
-                                </div>
-
-                                {/* Locations */}
-                                {/* TODO: scrollable list */}
-                                <div className='flex flex-col space-y-2 overflow-y-auto'>
-                                    {locationsList.map((loc) => {
-                                        if (location !== null
-                                                && loc.id === location.id)
-                                            return null;
-
-                                        return (
-                                            <button
-                                                key={loc.id}
-                                                onClick={() => setLocation(loc)}
-                                                className='rounded-lg px-4 py-1 h-8 text-start text-zinc-300 bg-zinc-800'>
-                                                {loc.name}
-                                            </button>
-                                        );
-                                    })}
-                                </div>
-                            </div>
-
-                            {/* Vertical separator */}
-                            {/* TODO: expand separator to full height */}
-                            <div
-                                className='w-px h-full bg-zinc-600'
-                                />
-
-                            {/* Preview column */}
-                            <div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    locations={locationsList} />
             )}
         </>
     );
