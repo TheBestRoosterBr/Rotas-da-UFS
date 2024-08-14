@@ -60,9 +60,9 @@ export function Modal(props: ModalProps) {
                 </div>
 
                 {/* Content row */}
-                <div className='flex h-full space-x-4 overflow-y-hidden'>
+                <div className='flex h-full space-x-4'>
                     {/* Locations column */}
-                    <div className='space-y-5'>
+                    <div className='space-y-3'>
                         {/* Search & Filter & Selected location */}
                         <div className='space-y-3'>
                             {/* Search & Filter */}
@@ -96,17 +96,22 @@ export function Modal(props: ModalProps) {
                             </div>
 
                             {selectedLocation !== null && (
-                                <div
-                                    key={selectedLocation.id}
-                                    className='flex item-center justify-between rounded-lg px-4 py-1 h-8 text-start  dark:bg-cyan-300'>
-                                    {selectedLocation.name}
+                                <div className='relative z-10'>
+                                    {/* This will hidden the elements when hover */}
+                                    <div className='absolute inset-0 h-12 bg-zinc-900' />
 
-                                    <button
-                                        onClick={() => setSelectedLocation(null)}
-                                        className=''>
-                                        <X
-                                            className='size-5 text-cyan-950' />
-                                    </button>
+                                    <div
+                                        key={selectedLocation.id}
+                                        className='absolute inset-0 flex item-center justify-between rounded-lg px-4 py-1 h-8 text-start  dark:bg-cyan-300'>
+                                        {selectedLocation.name}
+
+                                        <button
+                                            onClick={() => setSelectedLocation(null)}
+                                            className=''>
+                                            <X
+                                                className='size-5 text-cyan-950' />
+                                        </button>
+                                    </div>
                                 </div>
                             )}
                         </div>
@@ -117,6 +122,16 @@ export function Modal(props: ModalProps) {
                           * the list will overflow the modal height.
                           */}
                         <div className='flex flex-1 flex-col max-h-80 space-y-2 overflow-y-auto'>
+                            {selectedLocation !== null && (
+                                <>
+                                    {/* Padding: this is used to not hide the
+                                      * first list element when show the
+                                      * selected item o top of the list
+                                      */}
+                                    <div className='min-h-12 bg-blue' />
+                                </>
+                            )}
+
                             {locations.map((location) => {
                                 if (selectedLocation !== null
                                         && location.id === selectedLocation.id)
@@ -140,10 +155,10 @@ export function Modal(props: ModalProps) {
                         />
 
                     {/* Preview column */}
-                    {selectedLocation !== null ? (
+                    {selectedLocation !== null && false ? (
                         <div className='flex flex-1 h-full flex-col items-center'>
                             {/* Location informations */}
-                            <div className='flex h-full flex-col items-center space-y-1.5'>
+                            <div className='flex flex-1 h-full flex-col items-center space-y-1.5'>
                                 {/* Location image */}
                                 <div className='w-56 h-44 bg-zinc-400' />
 
@@ -151,15 +166,15 @@ export function Modal(props: ModalProps) {
                                     className='w-48 h-px bg-zinc-600' />
 
                                 {/* Location tile & description */}
-                                <div className='text-zinc-300 text-sm space-y-2'>
+                                <div className='w-full text-zinc-300 text-sm space-y-2'>
                                     <span className='flex justify-center text-center font-bold'>
                                         {selectedLocation.title ?? selectedLocation.name}
                                     </span>
 
                                     {selectedLocation.description !== undefined && (
-                                        <p className='text-justify'>
+                                        <pre className='h-28 text-justify overflow-y-auto'>
                                             {selectedLocation.description}
-                                        </p>
+                                        </pre>
                                     )}
                                 </div>
                             </div>
