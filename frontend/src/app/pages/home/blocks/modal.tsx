@@ -1,6 +1,8 @@
 import {
+    ArrowRight,
     Funnel,
     MagnifyingGlass,
+    MapPinArea,
     X
 } from '@phosphor-icons/react';
 
@@ -12,6 +14,9 @@ import { levenshtein } from '@/utils';
 interface Location {
     id: number;
     name: string;
+
+    title?: string;
+    description?: string;
 }
 
 interface ModalProps {
@@ -32,10 +37,15 @@ export function Modal(props: ModalProps) {
         })
     }, [search, props.locations]);
 
+    function handleConfirmLocation(): void {
+        props.onSelect(selectedLocation!);
+        props.onClose();
+    }
+
     return (
         <div className='fixed inset-0 bg-black/80 flex justify-center items-center'>
             {/* Modal window */}
-            <div className='flex flex-col w-[720px] h-96 bg-zinc-900 px-6 py-5 rounded-xl space-y-5'>
+            <div className='flex flex-col w-[720px] h-[464px] bg-zinc-900 px-6 py-5 rounded-xl space-y-5'>
                 {/* Title row */}
                 <div className="flex items-center justify-between">
                     <span className='text-lg text-zinc-300 font-semibold'>
@@ -50,9 +60,9 @@ export function Modal(props: ModalProps) {
                 </div>
 
                 {/* Content row */}
-                <div className='flex h-full space-x-4'>
+                <div className='flex h-full space-x-4 overflow-y-hidden'>
                     {/* Locations column */}
-                    <div className='space-y-6'>
+                    <div className='space-y-5'>
                         {/* Search & Filter & Selected location */}
                         <div className='space-y-3'>
                             {/* Search & Filter */}
@@ -106,7 +116,7 @@ export function Modal(props: ModalProps) {
                           * define a fixed max height for the list without this
                           * the list will overflow the modal height.
                           */}
-                        <div className='flex flex-1 flex-col max-h-56 space-y-2 overflow-y-auto'>
+                        <div className='flex flex-1 flex-col max-h-80 space-y-2 overflow-y-auto'>
                             {locations.map((location) => {
                                 if (selectedLocation !== null
                                         && location.id === selectedLocation.id)
@@ -126,12 +136,50 @@ export function Modal(props: ModalProps) {
 
                     {/* Vertical separator */}
                     <div
-                        className='w-px h-full bg-zinc-600'
+                        className='w-px h-72 my-auto bg-zinc-600'
                         />
 
                     {/* Preview column */}
-                    <div>
-                    </div>
+                    {selectedLocation !== null ? (
+                        <div className='flex flex-1 h-full flex-col items-center'>
+                            {/* Location informations */}
+                            <div className='flex h-full flex-col items-center space-y-1.5'>
+                                {/* Location image */}
+                                <div className='w-56 h-44 bg-zinc-400' />
+
+                                <div
+                                    className='w-48 h-px bg-zinc-600' />
+
+                                {/* Location tile & description */}
+                                <div className='text-zinc-300 text-sm space-y-2'>
+                                    <span className='flex justify-center text-center font-bold'>
+                                        {selectedLocation.title ?? selectedLocation.name}
+                                    </span>
+
+                                    {selectedLocation.description !== undefined && (
+                                        <p className='text-justify'>
+                                            {selectedLocation.description}
+                                        </p>
+                                    )}
+                                </div>
+                            </div>
+
+                            <div className='flex w-full items-center justify-end'>
+                                <button
+                                    onClick={handleConfirmLocation}
+                                    className='flex px-3 py-1.5 gap-2 items-center rounded-lg text-sm dark:bg-cyan-300'>
+                                    Confirmar
+                                    <ArrowRight
+                                        className='size-5' />
+                                </button>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className='flex flex-1 h-full items-center justify-center'>
+                            <MapPinArea
+                                className='size-52 text-zinc-400' />
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

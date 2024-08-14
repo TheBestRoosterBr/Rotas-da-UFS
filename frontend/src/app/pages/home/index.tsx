@@ -17,6 +17,9 @@ import { Modal } from './blocks/modal';
 interface Location {
     id: number;
     name: string;
+
+    title?: string;
+    description?: string;
 }
 
 
