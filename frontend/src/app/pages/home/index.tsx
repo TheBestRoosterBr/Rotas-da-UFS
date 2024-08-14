@@ -31,7 +31,7 @@ export function HomePage(): ReactNode {
         localStorage.getItem('themeMode') ?? 'dark'
     );
 
-    const [whereLocation, setWhereLocation] = useState<number>(0);
+    const [whereLocation, setWhereLocation] = useState<Location | null>(null);
     const [isWhereModelOpen, setWhereModalOpen] = useState<boolean>(false);
 
     const [locationsList, setLocationsList] = useState<Location[]>([]);
@@ -104,7 +104,7 @@ export function HomePage(): ReactNode {
                         {/* Input for current location */}
                         <div className='dark:bg-zinc-900 h-16 px-4 rounded-xl shadow-shadow flex items-center gap-3'>
                             <button
-                                disabled={whereLocation > 0}
+                                disabled={whereLocation !== null}
                                 onClick={() => openModal(setWhereModalOpen)}
                                 className='flex items-center gap-2 flex-1'>
                                 <MapPin
@@ -112,11 +112,15 @@ export function HomePage(): ReactNode {
 
                                 <span
                                     className='dark:text-zinc-400 text-lg'>
-                                    Onde você está?
+                                    {whereLocation !== null ? (
+                                        <>{whereLocation.title ?? whereLocation.name}</>
+                                    ) : (
+                                        <>Onde você está?</>
+                                    )}
                                 </span>
                             </button>
 
-                            {whereLocation > 0 && (
+                            {whereLocation !== null && (
                                 <button
                                     onClick={() => openModal(setWhereModalOpen)}
                                     className='shadow-shadow hover:bg-zinc-200 dark:text-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-600 px-5 py-2 font-medium flex items-center gap-2 rounded-lg'>
@@ -128,7 +132,7 @@ export function HomePage(): ReactNode {
                         </div>
 
                         {/* Input for destination location */}
-                        {whereLocation > 0 && (
+                        {whereLocation !== null && (
                             <div className='dark:bg-zinc-900 h-16 px-4 rounded-xl shadow-shadow flex items-center justify-between gap-3'>
                                 <button
                                     className='flex items-center gap-2 flex-1'>
@@ -156,7 +160,7 @@ export function HomePage(): ReactNode {
             {isWhereModelOpen && (
                 <Modal
                     onClose={() => setWhereModalOpen(false)}
-                    onSelect={(location) => setWhereLocation(location.id)}
+                    onSelect={(location) => setWhereLocation(location)}
 
                     isLoadingLocations={isLoadingLocations}
                     locations={locationsList} />
