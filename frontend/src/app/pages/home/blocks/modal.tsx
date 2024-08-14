@@ -23,6 +23,7 @@ interface ModalProps {
     onClose: () => void;
     onSelect: (location: Location) => void;
 
+    isLoadingLocations: boolean;
     locations: Location[];
 }
 
@@ -117,36 +118,36 @@ export function Modal(props: ModalProps) {
                         </div>
 
                         {/* Locations */}
-                        {/* Scrollable list note: the better solution found was
-                          * define a fixed max height for the list without this
-                          * the list will overflow the modal height.
-                          */}
-                        <div className='flex flex-1 flex-col max-h-80 space-y-2 overflow-y-auto'>
-                            {selectedLocation !== null && (
-                                <>
-                                    {/* Padding: this is used to not hide the
-                                      * first list element when show the
-                                      * selected item o top of the list
-                                      */}
-                                    <div className='min-h-12 bg-blue' />
-                                </>
-                            )}
+                        {props.isLoadingLocations ? (
+                            <p>TODO: LOADING</p>
+                        ) : (
+                            <div className='flex flex-1 flex-col max-h-80 space-y-2 overflow-y-auto'>
+                                {selectedLocation !== null && (
+                                    <>
+                                        {/* Padding: this is used to not hide the
+                                        * first list element when show the
+                                        * selected item o top of the list
+                                        */}
+                                        <div className='min-h-12 bg-blue' />
+                                    </>
+                                )}
 
-                            {locations.map((location) => {
-                                if (selectedLocation !== null
-                                        && location.id === selectedLocation.id)
-                                    return null;
+                                {locations.map((location) => {
+                                    if (selectedLocation !== null
+                                            && location.id === selectedLocation.id)
+                                        return null;
 
-                                return (
-                                    <button
-                                        key={location.id}
-                                        onClick={() => setSelectedLocation(location)}
-                                        className='rounded-lg px-4 py-1 h-8 text-start text-zinc-300 bg-zinc-800'>
-                                        {location.name}
-                                    </button>
-                                );
-                            })}
-                        </div>
+                                    return (
+                                        <button
+                                            key={location.id}
+                                            onClick={() => setSelectedLocation(location)}
+                                            className='rounded-lg px-4 py-1 h-8 text-start text-zinc-300 bg-zinc-800'>
+                                            {location.name}
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                        )}
                     </div>
 
                     {/* Vertical separator */}

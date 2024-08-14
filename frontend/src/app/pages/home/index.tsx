@@ -7,8 +7,11 @@ import {
 } from '@phosphor-icons/react';
 
 import {
+    Dispatch,
     ReactNode,
-    useState
+    SetStateAction,
+    useState,
+    useTransition,
 } from 'react';
 
 import { Modal } from './blocks/modal';
@@ -29,22 +32,10 @@ export function HomePage(): ReactNode {
     );
 
     const [whereLocation, setWhereLocation] = useState<number>(0);
-    const [isWhereModelOpen, setWhereModalOpen] = useState<boolean>(true);
+    const [isWhereModelOpen, setWhereModalOpen] = useState<boolean>(false);
 
-    const [locationsList, setLocationsList] = useState<Location[]>([
-        {
-            id: 1,
-            name: 'sala 007',
-        },
-        {
-            id: 2,
-            name: 'sala 006',
-        },
-        {
-            id: 3,
-            name: 'sala 005',
-        },
-    ]);
+    const [locationsList, setLocationsList] = useState<Location[]>([]);
+    const [isLoadingLocations, startLoadLocations] = useTransition();
 
     function changeTheme(): void {
         const newTheme: string = theme == 'dark' ? 'light' : 'dark';
@@ -54,6 +45,29 @@ export function HomePage(): ReactNode {
 
         localStorage.setItem('themeMode', newTheme);
         setTheme(newTheme);
+
+    }
+
+    function openModal(modal: Dispatch<SetStateAction<boolean>>): void {
+        startLoadLocations(() => {
+            fetch('/api/busca/get_estados')
+                .then((res) => res.json())
+                .then((data) => {
+                    for (const state of data.estados)
+                        setLocationsList((list) => {
+                            for (let tmp of list)
+                                if (tmp.id == state.id + 1)
+                                    return list;
+
+                            return [...list, {
+                                id: state.id + 1,
+                                name: state.nome,
+                            }];
+                        });
+                });
+        });
+
+        modal(true);
     }
 
     return (
@@ -91,7 +105,7 @@ export function HomePage(): ReactNode {
                         <div className='dark:bg-zinc-900 h-16 px-4 rounded-xl shadow-shadow flex items-center gap-3'>
                             <button
                                 disabled={whereLocation > 0}
-                                onClick={() => setWhereModalOpen(true)}
+                                onClick={() => openModal(setWhereModalOpen)}
                                 className='flex items-center gap-2 flex-1'>
                                 <MapPin
                                     className='size-5 dark:text-zinc-400'/>
@@ -104,6 +118,7 @@ export function HomePage(): ReactNode {
 
                             {whereLocation > 0 && (
                                 <button
+                                    onClick={() => openModal(setWhereModalOpen)}
                                     className='shadow-shadow hover:bg-zinc-200 dark:text-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-600 px-5 py-2 font-medium flex items-center gap-2 rounded-lg'>
                                     Alterar local
                                     <Swap
@@ -143,6 +158,7 @@ export function HomePage(): ReactNode {
                     onClose={() => setWhereModalOpen(false)}
                     onSelect={(location) => setWhereLocation(location.id)}
 
+                    isLoadingLocations={isLoadingLocations}
                     locations={locationsList} />
             )}
         </>
