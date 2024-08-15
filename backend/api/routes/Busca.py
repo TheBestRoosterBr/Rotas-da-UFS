@@ -5,6 +5,7 @@ from backend.graphToolsVol2.Reader import Reader
 from backend.graphToolsVol2.BuscaAEstrela import BuscaAEstrela
 from backend.graphToolsVol2.BuscaEmProfundidade import BuscaEmProfundidade
 from backend.graphToolsVol2.BuscaEmLargura import BuscaEmLargura
+from backend.graphToolsVol2.BuscaGulosa import BuscaGulosa
 
 router = Blueprint('busca', __name__, url_prefix='/busca')
 
@@ -80,4 +81,20 @@ def busca_em_largura():
     fim = next((estado for estado in estados if estado.id == fim), None)
     busca.busca(reader.graph, inicio, fim)
     return jsonify({'caminho': [estado.id for estado in busca.caminho]},
+                   {'ordem_expansao': [estado.id for estado in busca.ordem_expansao_nodos()]})
+    
+    
+@router.route('/busca_gulosa', methods=['POST'])
+def busca_gulosa():
+    data = request.json
+    inicio = data['inicio']
+    fim = data['fim']
+    reader = Reader(PATH_MAPA)
+    busca = BuscaGulosa()
+    estados = reader.estados
+    inicio = next((estado for estado in estados if estado.id == inicio), None)
+    fim = next((estado for estado in estados if estado.id == fim), None)
+    busca.busca(reader.graph, inicio, fim)
+    return jsonify({'caminho': [estado.id for estado in busca.caminho]},
+                   {'custo': busca.custo},
                    {'ordem_expansao': [estado.id for estado in busca.ordem_expansao_nodos()]})

@@ -1,11 +1,13 @@
-from BuscaAEstrela import BuscaAEstrela
+#from BuscaAEstrela import BuscaAEstrela
+from BuscaGulosa import BuscaGulosa
 from Reader import Reader
 
 
 class GraphTool:
     def teste(self, nome_estado1, nome_estado2):
         reader = Reader("../../Mapa/mapa.jff")
-        busca = BuscaAEstrela()
+        #busca = BuscaAEstrela()
+        busca = BuscaGulosa()
         estados = reader.graph.estados
         inicio = next((estado for estado in estados if estado.nome == nome_estado1), None)
         fim = next((estado for estado in estados if estado.nome == nome_estado2), None)
