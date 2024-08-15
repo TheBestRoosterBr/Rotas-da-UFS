@@ -27,19 +27,27 @@ interface ModalProps {
     onClose: () => void;
     onSelect: (location: Location) => void;
 
+    title: string;
+
+    currentLocation: Location | null;
     isLoadingLocations: boolean;
     locations: Location[];
 }
 
 
 export function Modal(props: ModalProps) {
-    const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
+    const [selectedLocation, setSelectedLocation] = useState<Location | null>(props.currentLocation);
     const [search, setSearch] = useState<string>('');
 
     const [isLoadingLocation, startLoadLocation] = useTransition();
 
     const locations = useMemo(() => {
-        return [...props.locations].sort((a, b) => {
+        return [...props.locations].filter((item) => {
+            if (props.currentLocation === null)
+                return true;
+
+            return props.currentLocation.id !== item.id;
+        }).sort((a, b) => {
             return levenshtein(search, a.name) - levenshtein(b.name, search)
         })
     }, [search, props.locations]);
@@ -56,7 +64,7 @@ export function Modal(props: ModalProps) {
                 {/* Title row */}
                 <div className="flex items-center justify-between">
                     <span className='text-lg text-zinc-300 font-semibold'>
-                        Nós diga onde você está
+                        {props.title}
                     </span>
                     <button
                         onClick={props.onClose}

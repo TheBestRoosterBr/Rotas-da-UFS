@@ -1,5 +1,6 @@
 import {
     ArrowRight,
+    Flag,
     MapPin,
     Moon,
     Sun,
@@ -110,14 +111,15 @@ export function HomePage(): ReactNode {
                                 <MapPin
                                     className='size-5 dark:text-zinc-400'/>
 
-                                <span
-                                    className='dark:text-zinc-400 text-lg'>
-                                    {whereLocation !== null ? (
-                                        <>{whereLocation.title ?? whereLocation.name}</>
-                                    ) : (
-                                        <>Onde você está?</>
-                                    )}
-                                </span>
+                                {whereLocation !== null ? (
+                                    <span className='dark:text-zinc-300 text-xl'>
+                                        {whereLocation.title ?? whereLocation.name}
+                                    </span>
+                                ) : (
+                                    <span className='dark:text-zinc-400 text-lg'>
+                                        Onde você está?
+                                    </span>
+                                )}
                             </button>
 
                             {whereLocation !== null && (
@@ -136,7 +138,7 @@ export function HomePage(): ReactNode {
                             <div className='dark:bg-zinc-900 h-16 px-4 rounded-xl shadow-shadow flex items-center justify-between gap-3'>
                                 <button
                                     className='flex items-center gap-2 flex-1'>
-                                    <MapPin
+                                    <Flag
                                         className='size-5 dark:text-zinc-400'/>
 
                                     <span
@@ -162,6 +164,9 @@ export function HomePage(): ReactNode {
                     onClose={() => setWhereModalOpen(false)}
                     onSelect={(location) => setWhereLocation(location)}
 
+                    title='Nós diga onde você está'
+
+                    currentLocation={whereLocation}
                     isLoadingLocations={isLoadingLocations}
                     locations={locationsList} />
             )}
