@@ -8,11 +8,9 @@ import {
 } from '@phosphor-icons/react';
 
 import {
-    Dispatch,
     ReactNode,
-    SetStateAction,
-    useState,
-    useTransition,
+    useEffect,
+    useState
 } from 'react';
 
 import { Modal } from './blocks/modal';
@@ -39,7 +37,27 @@ export function HomePage(): ReactNode {
     const [isDestinationModelOpen, setDestinationModalOpen] = useState<boolean>(false);
 
     const [locationsList, setLocationsList] = useState<Location[]>([]);
-    const [isLoadingLocations, startLoadLocations] = useTransition();
+
+
+    useEffect(() => {
+        fetch('/api/busca/get_estados')
+            .then((res) => res.json())
+            .then((data) => {
+                const locations = [];
+
+                for (const state of data.estados)
+                    locations.push({
+                        id: state.id + 1,
+                        name: state.nome,
+                    });
+
+                setLocationsList(locations);
+            })
+            .catch(() => {
+                console.log('Can\'t fetch data');
+            });
+    }, []);
+
 
     function changeTheme(): void {
         const newTheme: string = theme == 'dark' ? 'light' : 'dark';
@@ -52,30 +70,6 @@ export function HomePage(): ReactNode {
 
     }
 
-    function openModal(modal: Dispatch<SetStateAction<boolean>>): void {
-        startLoadLocations(() => {
-            fetch('/api/busca/get_estados')
-                .then((res) => res.json())
-                .then((data) => {
-                    for (const state of data.estados)
-                        setLocationsList((list) => {
-                            for (let tmp of list)
-                                if (tmp.id == state.id + 1)
-                                    return list;
-
-                            return [...list, {
-                                id: state.id + 1,
-                                name: state.nome,
-                            }];
-                        });
-                })
-                .catch(() => {
-                    console.log('Can\'t fetch data');
-                });
-        });
-
-        modal(true);
-    }
 
     return (
         <>
@@ -112,7 +106,7 @@ export function HomePage(): ReactNode {
                         <div className='dark:bg-zinc-900 h-16 px-4 rounded-xl shadow-shadow flex items-center gap-3'>
                             <button
                                 disabled={whereLocation !== null}
-                                onClick={() => openModal(setWhereModalOpen)}
+                                onClick={() => setWhereModalOpen(true)}
                                 className='flex items-center gap-2 flex-1'>
                                 <MapPin
                                     className='size-5 dark:text-zinc-400'/>
@@ -130,7 +124,7 @@ export function HomePage(): ReactNode {
 
                             {whereLocation !== null && (
                                 <button
-                                    onClick={() => openModal(setWhereModalOpen)}
+                                    onClick={() => setWhereModalOpen(true)}
                                     className='shadow-shadow hover:bg-zinc-200 dark:text-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-600 px-5 py-2 font-medium flex items-center gap-2 rounded-lg'>
                                     Alterar local
                                     <Swap
@@ -143,7 +137,7 @@ export function HomePage(): ReactNode {
                         {whereLocation !== null && (
                             <div className='dark:bg-zinc-900 h-16 px-4 rounded-xl shadow-shadow flex items-center justify-between gap-3'>
                                 <button
-                                    onClick={() => openModal(setDestinationModalOpen)}
+                                    onClick={() => setDestinationModalOpen(true)}
                                     className='flex items-center gap-2 flex-1'>
                                     <Flag
                                         className='size-5 dark:text-zinc-400'/>
@@ -179,7 +173,6 @@ export function HomePage(): ReactNode {
                     title='Nós diga onde você está'
 
                     currentLocation={whereLocation}
-                    isLoadingLocations={isLoadingLocations}
                     locations={locationsList} />
             )}
 
@@ -188,10 +181,9 @@ export function HomePage(): ReactNode {
                     onClose={() => setDestinationModalOpen(false)}
                     onSelect={(location) => setDestinationLocation(location)}
 
-                    title='Nós diga onde você está'
+                    title='Nós diga onde você deseja ir'
 
                     currentLocation={destinationLocation}
-                    isLoadingLocations={isLoadingLocations}
                     locations={locationsList} />
             )}
         </>
