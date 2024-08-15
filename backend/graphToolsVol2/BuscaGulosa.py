@@ -8,7 +8,7 @@ class BuscaGulosa:
         # Calcula a distância Euclidiana entre o estado atual e o estado objetivo
         return ((estado.x - objetivo.x) ** 2 + (estado.y - objetivo.y) ** 2) ** 0.5
 
-    def buscar(self, grafo, inicio, objetivo):
+    def busca(self, grafo, inicio, objetivo):
         self.caminho = []
         self.custo = 0
         self.visitados = set()
@@ -21,8 +21,7 @@ class BuscaGulosa:
             transicoes_validas = [t for t in grafo.transicoes if t.origem == atual and t.destino not in self.visitados]
 
             if not transicoes_validas:
-                print("Caminho não encontrado!")
-                return
+                return None
 
             # Escolhe a transição com o menor valor heurístico (custo estimado até o objetivo)
             proxima_transicao = min(transicoes_validas, key=lambda t: self.heuristica(t.destino, objetivo))
@@ -31,11 +30,7 @@ class BuscaGulosa:
             self.caminho.append(atual)
             self.custo += float(proxima_transicao.distancia)
             self.visitados.add(atual)
-
-        print("Caminho encontrado:")
-        for estado in self.caminho:
-            print(estado.nome)
-        print(f"Custo total: {self.custo}")
+        return self.caminho
 
     def ordem_expansao_nodos(self):
         return list(self.visitados)
