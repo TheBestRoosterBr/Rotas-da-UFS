@@ -35,6 +35,9 @@ export function HomePage(): ReactNode {
     const [whereLocation, setWhereLocation] = useState<Location | null>(null);
     const [isWhereModelOpen, setWhereModalOpen] = useState<boolean>(false);
 
+    const [destinationLocation, setDestinationLocation] = useState<Location | null>(null);
+    const [isDestinationModelOpen, setDestinationModalOpen] = useState<boolean>(false);
+
     const [locationsList, setLocationsList] = useState<Location[]>([]);
     const [isLoadingLocations, startLoadLocations] = useTransition();
 
@@ -65,6 +68,9 @@ export function HomePage(): ReactNode {
                                 name: state.nome,
                             }];
                         });
+                })
+                .catch(() => {
+                    console.log('Can\'t fetch data');
                 });
         });
 
@@ -137,14 +143,20 @@ export function HomePage(): ReactNode {
                         {whereLocation !== null && (
                             <div className='dark:bg-zinc-900 h-16 px-4 rounded-xl shadow-shadow flex items-center justify-between gap-3'>
                                 <button
+                                    onClick={() => openModal(setDestinationModalOpen)}
                                     className='flex items-center gap-2 flex-1'>
                                     <Flag
                                         className='size-5 dark:text-zinc-400'/>
 
-                                    <span
-                                        className='dark:text-zinc-400 text-lg'>
-                                        Para onde você vai?
-                                    </span>
+                                    {destinationLocation !== null ? (
+                                        <span className='dark:text-zinc-300 text-xl'>
+                                            {destinationLocation.title ?? destinationLocation.name}
+                                        </span>
+                                    ) : (
+                                        <span className='dark:text-zinc-400 text-lg'>
+                                            Para onde você vai?
+                                        </span>
+                                    )}
                                 </button>
 
                                 <button
@@ -167,6 +179,18 @@ export function HomePage(): ReactNode {
                     title='Nós diga onde você está'
 
                     currentLocation={whereLocation}
+                    isLoadingLocations={isLoadingLocations}
+                    locations={locationsList} />
+            )}
+
+            {isDestinationModelOpen && (
+                <Modal
+                    onClose={() => setDestinationModalOpen(false)}
+                    onSelect={(location) => setDestinationLocation(location)}
+
+                    title='Nós diga onde você está'
+
+                    currentLocation={destinationLocation}
                     isLoadingLocations={isLoadingLocations}
                     locations={locationsList} />
             )}
