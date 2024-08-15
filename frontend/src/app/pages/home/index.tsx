@@ -38,8 +38,12 @@ export function HomePage(): ReactNode {
 
     const [locationsList, setLocationsList] = useState<Location[]>([]);
 
+    const [isLoading, setLoading] = useState<boolean>(false);
+
 
     useEffect(() => {
+        setLoading(true);
+
         fetch('/api/busca/get_estados')
             .then((res) => res.json())
             .then((data) => {
@@ -51,6 +55,7 @@ export function HomePage(): ReactNode {
                         name: state.nome,
                     });
 
+                setLoading(false);
                 setLocationsList(locations);
             })
             .catch(() => {
