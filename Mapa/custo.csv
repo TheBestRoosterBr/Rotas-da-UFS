@@ -1,200 +1,200 @@
 LUGAR,Latitude,Longitude
-Entrada,"-10,6817430","-37,4364287"
-Xerox,"-10,6817772","-37,4357699"
-Curva Estufa,"-10,6815710","-37,4361143"
-Nippec,"-10,6815766","-37,4359238"
-Porta Nippec,"-10,6814860","-37,4359526"
-Estufa,"-10,6814553","-37,4359154"
-Curva Nippec,"-10,6815710","-37,4361143"
+Entrada,-10.6817430,-37.4364287
+Xerox,-10.6817772,-37.4357699
+Curva Estufa,-10.6815710,-37.4361143
+Nippec,-10.6815766,-37.4359238
+Porta Nippec,-10.6814860,-37.4359526
+Estufa,-10.6814553,-37.4359154
+Curva Nippec,-10.6815710,-37.4361143
 Encruzilhada Reforma,-10.681730,-37.436219
 Acesso Rampa BlocoD,-10.681968,-37.436244
-Bancos,"-10,6816329","-37,4363171"
-Terreo Bloco D,"-10,6816306","-37,4364576"
-008D,"-10,6817720","-37,4364562"
-001D,"-10,6817641","-37,4364217"
-002D,"-10,6818033","-37,4364277"
-007D,"-10,6818444","-37,4364505"
-006D,"-10,6818850","-37,4364438"
-lafise 003D,"-10,6818790","-37,4364200"
-Labimc,"-10,6818537","-37,4364143"
-005D,"-10,6818645","-37,4364814"
-labDEnsinoBiologia I 004,"-10,6818678","-37,4364281"
-Saida Resun Bloco D,"-10,6819752","-37,4364616"
+Bancos,-10.6816329,-37.4363171
+Terreo Bloco D,-10.6816306,-37.4364576
+008D,-10.6817720,-37.4364562
+001D,-10.6817641,-37.4364217
+002D,-10.6818033,-37.4364277
+007D,-10.6818444,-37.4364505
+006D,-10.6818850,-37.4364438
+lafise 003D,-10.6818790,-37.4364200
+Labimc,-10.6818537,-37.4364143
+005D,-10.6818645,-37.4364814
+labDEnsinoBiologia I 004,-10.6818678,-37.4364281
+Saida Resun Bloco D,-10.6819752,-37.4364616
 Refeitório,-10.682002,-37.436561
-Banheiro M Bloco D,"-10,6815529","-37,4364619"
-Banheiro F Bloco D,"-10,6815885","-37,4364321"
+Banheiro M Bloco D,-10.6815529,-37.4364619
+Banheiro F Bloco D,-10.6815885,-37.4364321
 Entrada1andarBLOCO D,-10.681691,-37.436425
-Entrada departamento superior,"-10,6815779","-37,4364817"
+Entrada departamento superior,-10.6815779,-37.4364817
 entrada corredor 1 sup,-10.681627,-37.436454
-secretaria quimica,-10.681.597,-37.436.469
-entrada corredor 2 sup,"-10,6815147","-37,4367395"
-sala dosea-methanias,-10.681.660,-37.436.522
-sala andre luiz e jose carlos,-10.681.611,-37.436.518
-sala maily e alcides,-10.681.634,-37.436.558
-sala joseval e raphael,-10.681.610,-37.436.557
-Almoxarifadoo provisorio,-10.681.620,-37.436.560
-sala nirly e joao paulo,-10.681.636,-37.436.471
-sala marcelo e victor,-10.681.618,-37.436.551
-sala andre vini e andres ignacio,-10.681.613,-37.436.540
-sala jose aelio,-10.681.635,-37.436.579
-secretaria dsi,-10.681.624,-37.436.564
-Adriana e vilma ,"-10,6815413","-37,4365736"
-sala beto vianna,"-10,681542","-37,4365726"
-secretaria letras,"-10,6815334","-37,4366514"
-sala renata e valeria,"-10,6815443","-37,4364774"
-sala luciano e ivy,"-10,6815479","-37,4364717"
-sala christina e marcia,"-10,6815357","-37,4365665"
-sala derli e luiz,"-10,6815318","-37,4366178"
-sala fabio e jeane ,"-10,6815324","-37,4365826"
-entrada escada,"-10,6815282","-37,4367419"
-sala reunioes bloco d parte de baixo,"-10,6815351","-37,4367097"
-sala maria  e jessica,-10.681578,-37.436398
-sala gustavo e luiz bruno,-10.681636,-37.436474
-sala pablo e silvia,"-10,6816000"," -37,4364569"
-sala flavio e assirleide,"-10,6815911"," -37,4364683"
-sala alex fabiano e juliano,"-10,6816412"," -37,4364153"
-sala eder e wagner,"-10,6815822"," -37,4364093"
-sala charles e viviane,-10.681561,-37.436470
-sala alejandro e aislan,"-10.681589", -37.436427
-secretaria contabeis,"-10,6816389"," -37,4363707"
-lab contabilidade,"-10,6816415","-37,4363811"
-secretaria mat,"-10,6815960"," -37,4363402"
-giec,-10.681612," -37,4363654"
-lab mat,"-10,6815117"," -37,4363483"
-sala alan almeida e ricardo,"-10,6815525","-37,4363825"
-sala marta elid e teresa cristina,"-10,6814952"," -37,4363694"
-sala fabio lima e samuel,"-10,6815417","-37,4364167"
-sala rafael neves e mateus,"-10,6815114"," -37,4363583"
-sala moacir heloisa,"-10,6815746","-37,4364546"
-sala jean paul e luciene,"-10,6815581"," -37,4365085"
-101D,"-10,6817690","-37,4364529"
-108D,"-10,6817621","-37,4365092"
-107D,"-10,6818471","-37,4365216"
-102D,"-10,6818893","-37,4364472"
-103D,"-10,6819021","-37,4364502"
-104D,"-10,6819486","-37,4364462"
-106D,"-10,6818873","-37,4365236"
-105D,"-10,6819370","-37,4365360"
-Entrada bloco C,"-10,6817957","-37,4356730"
-1Andar BlocoC escada1,"-10,6817169","-37,4355503"
-Hall Superior Bloco C,"-10,6817782","-37,4356009"
-104C,"-10,6817104","-37,4355423"
-110C,"-10,6816389","-37,4356040"
-105C,"-10,6816761","-37,4355617"
-lepem,"-10,6816415","-37,4355942"
-Lapeq IV,"-10,6816422","-37,4356040"
-Hall Bloco C,"-10,6817239","-37,4355838"
-Banheiro F Bloco C,"-10,6817239","-37,4355590"
-Banheiro M Bloco C,"-10,6817301","-37,4355500"
-1Andar BlocoC escada2,"-10,6817647","-37,4355966"
+secretaria quimica,-10.681597,-37.436469
+entrada corredor 2 sup,-10.6815147,-37.4367395
+sala dosea-methanias,-10.681660,-37.436522
+sala andre luiz/jose carlos,-10.681611,-37.436518
+sala maily/alcides,-10.681634,-37.436558
+sala joseval/raphael,-10.681610,-37.436557
+Almoxarifadoo provisorio,-10.681620,-37.436560
+sala nirly/joao paulo,-10.681636,-37.436471
+sala marcelo/victor,-10.681618,-37.436551
+sala andre vini/andres ignacio,-10.681613,-37.436540
+sala jose aelio,-10.681635,-37.436579
+secretaria dsi,-10.681624,-37.436564
+Adriana/vilma,-10.6815413,-37.4365736
+sala beto vianna,-10.681542,-37.4365726
+secretaria letras,-10.6815334,-37.4366514
+sala renata/valeria,-10.6815443,-37.4364774
+sala luciano/ivy,-10.6815479,-37.4364717
+sala christina/marcia,-10.6815357,-37.4365665
+sala derli/luiz,-10.6815318,-37.4366178
+sala fabio/jeane,-10.6815324,-37.4365826
+entrada escada,-10.6815282,-37.4367419
+sala reunioes bloco d parte de baixo,-10.6815351,-37.4367097
+sala maria/jessica,-10.681578,-37.436398
+sala gustavo/luiz bruno,-10.681636,-37.436474
+sala pablo/silvia,-10.6816000,-37.4364569
+sala flavio/assirleide,-10.6815911,-37.4364683
+sala alex fabiano/juliano,-10.6816412,-37.4364153
+sala eder/wagner,-10.6815822,-37.4364093
+sala charles/viviane,-10.681561,-37.436470
+sala alejandro/aislan,-10.681589,-37.436427
+secretaria contabeis,-10.6816389,-37.4363707
+lab contabilidade,-10.6816415,-37.4363811
+secretaria mat,-10.6815960,-37.4363402
+giec,-10.681612,-37.4363654
+lab mat,-10.6815117,-37.4363483
+sala alan almeida/ricardo,-10.6815525,-37.4363825
+sala marta elid/teresa cristina,-10.6814952,-37.4363694
+sala fabio lima/samuel,-10.6815417,-37.4364167
+sala rafael neves/mateus,-10.6815114,-37.4363583
+sala moacir heloisa,-10.6815746,-37.4364546
+sala jean paul/luciene,-10.6815581,-37.4365085
+101D,-10.6817690,-37.4364529
+108D,-10.6817621,-37.4365092
+107D,-10.6818471,-37.4365216
+102D,-10.6818893,-37.4364472
+103D,-10.6819021,-37.4364502
+104D,-10.6819486,-37.4364462
+106D,-10.6818873,-37.4365236
+105D,-10.6819370,-37.4365360
+Entrada bloco C,-10.6817957,-37.4356730
+1Andar BlocoC escada1,-10.6817169,-37.4355503
+Hall Superior Bloco C,-10.6817782,-37.4356009
+104C,-10.6817104,-37.4355423
+110C,-10.6816389,-37.4356040
+105C,-10.6816761,-37.4355617
+lepem,-10.6816415,-37.4355942
+Lapeq IV,-10.6816422,-37.4356040
+Hall Bloco C,-10.6817239,-37.4355838
+Banheiro F Bloco C,-10.6817239,-37.4355590
+Banheiro M Bloco C,-10.6817301,-37.4355500
+1Andar BlocoC escada2,-10.6817647,-37.4355966
 Sala Servidor,-10.6817281,-37.4357089
-109C,"-10,6819509",-37.4355024
-103C,"-10,6818672","-37,4355131"
-108C,"-10,6819446","-37,4356006"
-102C,"-10,6819383","-37,4355161"
-107C,"-10,6820105","-37,4355966"
-101C,"-10,6819545","-37,4355151"
+109C,-10.6819509,-37.4355024
+103C,-10.6818672,-37.4355131
+108C,-10.6819446,-37.4356006
+102C,-10.6819383,-37.4355161
+107C,-10.6820105,-37.4355966
+101C,-10.6819545,-37.4355151
 Mini Auditorio,-10.6820072,-37.4354507
-Corredor Bloco C - B,"-10,6817611","-37,4354920"
-Lance,"-10,6815067","-37,4354631"
-Sala Modular,"-10,6815259",-37.4354534
-lab 1 bloco C,"-10,6816260","-37,4353522"
-Banheiro Container,"-10,6814932","-37,4354082"
+Corredor Bloco C - B,-10.6817611,-37.4354920
+Lance,-10.6815067,-37.4354631
+Sala Modular,-10.6815259,-37.4354534
+lab 1 bloco C,-10.6816260,-37.4353522
+Banheiro Container,-10.6814932,-37.4354082
 Bloco B,X,X
-Entrada bloco B,"-10,6817015","-37,4352677"
-Biblioteca,"-10,6816471","-37,4353414"
-Diaesi,"-10,6817660","-37,4352710"
-Saes Serviço Social,"-10,6817970","-37,4352586"
-Brinquedoteca,"-10,6817693","-37,4352838"
-Labcont2,"-10,6816408","-37,4353361"
-Lab 3,"-10,6816405","-37,4353481"
-Saes Psicologia,"-10,6816471","-37,4353414"
-Rua CTI,"-10,6817934","-37,4353461"
-CTI,"-10,6816827","-37,4352405"
-Travessa para Bloco A,"-10,6816945","-37,4350202"
-Escada Acesso Bloco A,"-10,6818003","-37,4349626"
-Entrada Rampa Bloco A,"-10,6815911","-37,4349773"
-Entrada Bloco A,"-10,6818283","-37,4349079"
-Esquina Bloco A,"-10,6820023","-37,4349559"
-Entrada Vivência ,"-10,6820125","-37,4345063"
-Vivência,"-10,6820464","-37,4344848"
-Estacionamento,"-10,6816198","-37,4346189"
+Entrada bloco B,-10.6817015,-37.4352677
+Biblioteca,-10.6816471,-37.4353414
+Diaesi,-10.6817660,-37.4352710
+Saes Serviço Social,-10.6817970,-37.4352586
+Brinquedoteca,-10.6817693,-37.4352838
+Labcont2,-10.6816408,-37.4353361
+Lab 3,-10.6816405,-37.4353481
+Saes Psicologia,-10.6816471,-37.4353414
+Rua CTI,-10.6817934,-37.4353461
+CTI,-10.6816827,-37.4352405
+Travessa para Bloco A,-10.6816945,-37.4350202
+Escada Acesso Bloco A,-10.6818003,-37.4349626
+Entrada Rampa Bloco A,-10.6815911,-37.4349773
+Entrada Bloco A,-10.6818283,-37.4349079
+Esquina Bloco A,-10.6820023,-37.4349559
+Entrada Vivência,-10.6820125,-37.4345063
+Vivência,-10.6820464,-37.4344848
+Estacionamento,-10.6816198,-37.4346189
 hall bloco a,-10.681925,-37.434794
-diaci,"-10,6818952","-37,4347926"
-lab geografia a,"-10,6818893","-37,4347624"
-Almoxarifado,"-10,6819192","-37,4348157"
-secomi,"-10,6818939","-37,4348201"
-vice-direcao,"-10,6819209","-37,4348157"
-seci,"-10,6818955","-37,4348379"
-almoxarifado de limpeza,"-10,6818873","-37,4347976"
-hall fundo a,"-10,6818909","-37,4348077"
-divisao pedagogica e de extensao,"-10,6818224","-37,4346893"
-lab pesquisa quimica,"-10,6817927","-37,4347078"
-coadi e diopi,"-10,6817851","-37,4347168"
-lab producao texto,"-10,6817851","-37,4347168"
-sala monitoria mat,"-10,6818227","-37,4346863"
-lab ensino e pesquisa,"-10,6817275","-37,4347735"
-itatech empresa junior,"-10,6817301","-37,4348157"
-lab pesquisa em letras,"-10,6817301","-37,4348157"
-lab interdisciplinar de formação educador (life),"-10,6819598","-37,4348037"
-Sala C 106 nt/planilha ,-10.6817281,-37.4357089
-banheiro bloco C parte superior faltando na planilha ,"-10,6819825","-37,4356066"
-banheiro corredor inferior C ,"-10,6819683","-37,4356194"
-labev inferior C ,"-10,6819410"," -37,4356338"
-LQD I bloco C inferior ,"-10,6819238","-37,4355366"
-LAPEC I parte inferior bloco c ,"-10,6818774","-37,4355396"
-LECoB bloco C inferior ,"-10,6818517","-37,4356090"
-LAPEQ II ,"-10,6818949","-37,4355215"
-LABNEURO ,"-10,6818662","-37,4356150"
-LAPEQ III ,"-10,6817957"," -37,4355282"
-lab de preparação de matérias e magnetismo ,"-10,6816982","-37,4355510"
-LQD II ,"-10,6815407","-37,4355895"
-lab de ensino de física ii ,"-10,6815716","-37,4355721"
-sala de fornos ,"-10,6815746","-37,4356127"
-lab de ensino de física i ,"-10,6816046","-37,4356130"
-sala de materiais ,"-10,6815829"," -37,4355624"
-Sala C - Departamento de Biociências ,-10.6819021,-37.4355289
-térreo bloco D ,"-10,6816306","-37,4364576"
-hall departamento inferior ,"-10,6815707","-37,4364727"
-hall departamento superior ,"-10,6816049","-37,4364653"
-lab informatica departamento de letras,"-10,6815631","-37,4366336"
-secretaria física ,"-10,6815453","-37,4366547"
-sala camilo bruno e renato santos,"-10,6815548"," -37,4365287"
-sala celso josé viana,"-10,6814820"," -37,4366339"
-sala josé gerivaldo e fabiano rabelo,"-10,6814626"," -37,4365930"
-sala adilmo fancisco e tiago nery,"-10,6814781","-37,4365917"
-sala luciara benedita e diógenes reyes,"-10,6814776","-37,4365892"
-sala cristiano teles e juliana marcela,"-10,6814646","-37,4364857"
-sala antônio vinícius e alessandra cabral,"-10,6814557","-37,4364512"
-sala ivanilda silva e valdice barbosa,"-10,6814543","-37,4364510"
-sala daniele monique e josé maxuel,"-10,6814540","-37,4364505"
-Sala valdenira Meneses e marcos Antônio ,"-10,6814547"," -37,4364589"
-Sala de estudos ,-10.681473,-37.436484
-Sala cristiano Aprigio e Daniel Rodrigues,-10.681564,-37.436476
-Sala Fabrícia de Oliveira e Larissa Monteriro,-10.681613,-37.436416
-Sala Daniel Almeida e José Hunaldo,-10.681554,-37.436438
-Sala Josefa de Lisboa e Ana Rocha ,-10.681606,-37.436427
-Sala Oscar Alfredo e Marleide Maria ,"-10,6816115"," -37,4363727"
-Secretaria  Geografia ,"-10,6815720"," -37,4363345"
-laboratório informática geografia ,"-10,6815641"," -37,4363308"
-Sala Marcelo Alves e Vanessa Dias,-10.681555,-37.436453
-sala maria andréa,"-10,6814573","-37,4364676"
-secretaria administração ,"-10,6815285","-37,4364422"
-sala 6 no departamento de biologia ,"-10,6815908"," -37,4365655"
-sala 3 no departamento de biologia ,"-10,6815908"," -37,4365655"
-sala josé ronaldo e eduardo josé,"-10,6815911","-37,4366068"
-sala marcos vinicius meiado ,"-10,6815957","-37,4366219"
-sala lia midori e márcio andrei,"-10,6815940"," -37,4366214"
-sala célia gomes e ricardo santos,"-10,6815949","-37,4366214"
-sala 9 no departamento de biologia ,"-10,6815937"," -37,4366210"
-sala juliano ricardo fabricante ,"-10,6815940"," -37,4366205"
-"sala márcio andrei guimarães, lia midori e tainan amorim","-10,6816161","-37,4366990"
-secretaria biociências ,"-10,6816160"," -37,4366987"
-laboratório de informática Educação ,-10.681788,-37.436243
-Secretaria Educação ,-10.681701,-37.436283
-"Sala Bruno Cerqueira, Dilma Barros e Maria Jeane ",-10.681713,-37.436340
-"Sala Joelma carvalho, Marilene Santos e Simone ",-10.681614,-37.436335
-"Sala João Paulo, Marcos Aurélio e Paulo Sérgio ",-10.681565,-37.436392
-"Sala Lívia Jéssica, Maria Batista e Marilene Batista",-10.681594,-37.436451
-"Sala Fernanda Amorim, Isabela Rosália e sule Samaio",-10.681587,-37.436447
-"Sala Daisy Mara, Mônica Andrade e Paulo Sérgio ",-10.681572,-37.436450
+diaci,-10.6818952,-37.4347926
+lab geografia a,-10.6818893,-37.4347624
+Almoxarifado,-10.6819192,-37.4348157
+secomi,-10.6818939,-37.4348201
+vice-direcao,-10.6819209,-37.4348157
+seci,-10.6818955,-37.4348379
+almoxarifado de limpeza,-10.6818873,-37.4347976
+hall fundo a,-10.6818909,-37.4348077
+divisao pedagogica e de extensao,-10.6818224,-37.4346893
+lab pesquisa quimica,-10.6817927,-37.4347078
+coadi e diopi,-10.6817851,-37.4347168
+lab producao texto,-10.6817851,-37.4347168
+sala monitoria mat,-10.6818227,-37.4346863
+lab ensino e pesquisa,-10.6817275,-37.4347735
+itatech empresa junior,-10.6817301,-37.4348157
+lab pesquisa em letras,-10.6817301,-37.4348157
+lab interdisciplinar de formação educador (life),-10.6819598,-37.4348037
+Sala C 106 nt/planilha,-10.6817281,-37.4357089
+banheiro bloco C parte superior faltando na planilha,-10.6819825,-37.4356066
+banheiro corredor inferior C,-10.6819683,-37.4356194
+labev inferior C,-10.6819410,-37.4356338
+LQD I bloco C inferior,-10.6819238,-37.4355366
+LAPEC I parte inferior bloco c,-10.6818774,-37.4355396
+LECoB bloco C inferior,-10.6818517,-37.4356090
+LAPEQ II,-10.6818949,-37.4355215
+LABNEURO,-10.6818662,-37.4356150
+LAPEQ III,-10.6817957,-37.4355282
+lab de preparação de matérias e magnetismo,-10.6816982,-37.4355510
+LQD II,-10.6815407,-37.4355895
+lab de ensino de física ii,-10.6815716,-37.4355721
+sala de fornos,-10.6815746,-37.4356127
+lab de ensino de física i,-10.6816046,-37.4356130
+sala de materiais,-10.6815829,-37.4355624
+Sala C - Departamento de Biociências,-10.6819021,-37.4355289
+térreo bloco D,-10.6816306,-37.4364576
+hall departamento inferior,-10.6815707,-37.4364727
+hall departamento superior,-10.6816049,-37.4364653
+lab informatica departamento de letras,-10.6815631,-37.4366336
+secretaria física,-10.6815453,-37.4366547
+sala camilo bruno/renato santos,-10.6815548,-37.4365287
+sala celso josé viana,-10.6814820,-37.4366339
+sala josé gerivaldo/fabiano rabelo,-10.6814626,-37.4365930
+sala adilmo fancisco/tiago nery,-10.6814781,-37.4365917
+sala luciara benedita/diógenes reyes,-10.6814776,-37.4365892
+sala cristiano teles/juliana marcela,-10.6814646,-37.4364857
+sala antônio vinícius/alessandra cabral,-10.6814557,-37.4364512
+sala ivanilda silva/valdice barbosa,-10.6814543,-37.4364510
+sala daniele monique/josé maxuel,-10.6814540,-37.4364505
+Sala valdenira Meneses/marcos Antônio,-10.6814547,-37.4364589
+Sala de estudos,-10.681473,-37.436484
+Sala cristiano Aprigio/Daniel Rodrigues,-10.681564,-37.436476
+Sala Fabrícia de Oliveira/Larissa Monteriro,-10.681613,-37.436416
+Sala Daniel Almeida/José Hunaldo,-10.681554,-37.436438
+Sala Josefa de Lisboa/Ana Rocha,-10.681606,-37.436427
+Sala Oscar Alfredo/Marleide Maria,-10.6816115,-37.4363727
+Secretaria Geografia,-10.6815720,-37.4363345
+laboratório informática geografia,-10.6815641,-37.4363308
+Sala Marcelo Alves/Vanessa Dias,-10.681555,-37.436453
+sala maria andréa,-10.6814573,-37.4364676
+secretaria administração,-10.6815285,-37.4364422
+sala 6 no departamento de biologia,-10.6815908,-37.4365655
+sala 3 no departamento de biologia,-10.6815908,-37.4365655
+sala josé ronaldo/eduardo josé,-10.6815911,-37.4366068
+sala marcos vinicius meiado,-10.6815957,-37.4366219
+sala lia midori/márcio andrei,-10.6815940,-37.4366214
+sala célia gomes/ricardo santos,-10.6815949,-37.4366214
+sala 9 no departamento de biologia,-10.6815937,-37.4366210
+sala juliano ricardo fabricante,-10.6815940,-37.4366205
+sala márcio andrei guimarães/lia midori/tainan amorim,-10.6816161,-37.4366990
+secretaria biociências,-10.6816160,-37.4366987
+laboratório de informática Educação,-10.681788,-37.436243
+Secretaria Educação,-10.681701,-37.436283
+Sala Bruno Cerqueira/Dilma Barros/Maria Jeane,-10.681713,-37.436340
+Sala Joelma carvalho/Marilene Santos/Simone,-10.681614,-37.436335
+Sala João Paulo/Marcos Aurélio/Paulo Sérgio,-10.681565,-37.436392
+Sala Lívia Jéssica/Maria Batista/Marilene Batista,-10.681594,-37.436451
+Sala Fernanda Amorim/Isabela Rosália/Sule Samaio,-10.681587,-37.436447
+Sala Daisy Mara/Mônica Andrade/Paulo Sérgio,-10.681572,-37.436450
