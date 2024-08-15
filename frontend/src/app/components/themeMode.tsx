@@ -8,6 +8,7 @@ import {
     useState
 } from 'react';
 
+
 export function ThemeMode(): ReactNode {
     const [theme, setTheme] = useState<string>(
         localStorage.getItem('themeMode') ?? 'dark'
@@ -33,9 +34,11 @@ export function ThemeMode(): ReactNode {
                 className=''>
                 {theme == 'dark' ? (
                     <Sun
+                        weight='duotone'
                         className='text-zinc-800 dark:text-zinc-400 size-6' />
                 ) : (
                     <Moon
+                        weight='duotone'
                         className='text-zinc-800 dark:text-zinc-400 size-6' />
                 )}
             </button>

@@ -12,6 +12,7 @@ import {
 } from 'react';
 
 import { Modal } from './blocks/modal';
+
 import { ThemeMode } from '@/components/themeMode';
 
 
@@ -61,7 +62,9 @@ export function HomePage(): ReactNode {
 
     return (
         <>
-            <ThemeMode />
+            <header>
+                <ThemeMode />
+            </header>
 
             {/* Main content */}
             <main className='h-screen flex items-center justify-center'>
