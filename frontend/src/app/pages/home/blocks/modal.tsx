@@ -38,8 +38,6 @@ export function Modal(props: ModalProps) {
     const [selectedLocation, setSelectedLocation] = useState<Location | null>(props.currentLocation);
     const [search, setSearch] = useState<string>('');
 
-    const [isLoadingLocation, startLoadLocation] = useTransition();
-
     const locations = useMemo(() => {
         return [...props.locations].filter((item) => {
             if (props.currentLocation === null)
@@ -50,6 +48,7 @@ export function Modal(props: ModalProps) {
             return levenshtein(search, a.name) - levenshtein(b.name, search)
         })
     }, [search, props.locations]);
+
 
     function handleConfirmLocation(): void {
         props.onSelect(selectedLocation!);

@@ -47,7 +47,7 @@ export function HomePage(): ReactNode {
 
                 for (const state of data.estados)
                     locations.push({
-                        id: state.id + 1,
+                        id: parseInt(state.id) + 1,
                         name: state.nome,
                     });
 
