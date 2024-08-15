@@ -32,6 +32,8 @@ def get_estado():
     reader = Reader(PATH_MAPA)
     estados = reader.estados
     estado = next((estado for estado in estados if estado.id == id), None)
+    if estado is None:
+        return jsonify(404, "nao tem esse estado")
     return jsonify({'estado': {'id': estado.id, 'nome': estado.nome,
                                'image_path': "../imagens/" + estado.nome + ".png"}})
 
