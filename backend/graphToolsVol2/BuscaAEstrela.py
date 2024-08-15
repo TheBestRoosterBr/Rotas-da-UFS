@@ -1,3 +1,6 @@
+from Haversine import heuristica
+
+
 class BuscaAEstrela:
     def __init__(self):
         self.fronteira = []
@@ -20,7 +23,7 @@ class BuscaAEstrela:
 
             for transicao in grafo.transicoes:
                 if transicao.origem == estado_atual:
-                    custo = estado_atual.custo + transicao.distancia
+                    custo = heuristica(estado_atual, transicao.destino) + transicao.distancia
                     if transicao.destino not in self.visitados:
                         transicao.destino.custo = custo
                         self.fronteira.append(transicao.destino)

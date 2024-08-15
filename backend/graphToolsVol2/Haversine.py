@@ -25,3 +25,7 @@ def haversine(lat1, lon1, lat2, lon2):
     distance_meters = distance_km * 1000
 
     return distance_meters
+
+
+def heuristica(estado1, estado2):
+    return haversine(estado1.latitude, estado1.longitude, estado2.latitude, estado2.longitude)

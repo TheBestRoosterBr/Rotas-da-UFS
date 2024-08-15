@@ -1,12 +1,11 @@
+from Haversine import heuristica
+
+
 class BuscaGulosa:
     def __init__(self):
         self.caminho = []
         self.custo = 0
         self.visitados = set()
-
-    def heuristica(self, estado, objetivo):
-        # Calcula a distância Euclidiana entre o estado atual e o estado objetivo
-        return ((estado.x - objetivo.x) ** 2 + (estado.y - objetivo.y) ** 2) ** 0.5
 
     def busca(self, grafo, inicio, objetivo):
         self.caminho = []
@@ -24,7 +23,7 @@ class BuscaGulosa:
                 return None
 
             # Escolhe a transição com o menor valor heurístico (custo estimado até o objetivo)
-            proxima_transicao = min(transicoes_validas, key=lambda t: self.heuristica(t.destino, objetivo))
+            proxima_transicao = min(transicoes_validas, key=lambda t: heuristica(t.destino, objetivo))
 
             atual = proxima_transicao.destino
             self.caminho.append(atual)
