@@ -9,7 +9,6 @@ import {
 import {
     useMemo,
     useState,
-    useTransition
 } from 'react';
 
 import { levenshtein } from '@/utils';
@@ -37,6 +36,7 @@ interface ModalProps {
 export function Modal(props: ModalProps) {
     const [selectedLocation, setSelectedLocation] = useState<Location | null>(props.currentLocation);
     const [search, setSearch] = useState<string>('');
+    const [loadedLocations, addLoadedLocations] = useState<Location[]>([]);
 
     const [isLoading, setLoading] = useState<boolean>(false);
 
@@ -58,12 +58,19 @@ export function Modal(props: ModalProps) {
     }
 
     function handleSelection(location: Location): void {
+        const cached = loadedLocations.filter((item) => item.id == location.id);
+        if (cached.length > 0) {
+            setSelectedLocation(cached[0]!);
+            return;
+        }
+
         setLoading(true);
         setSelectedLocation(location);
 
         fetch(`/api/busca/get_estado?id=${location.id}`)
             .then((res) => res.json())
             .then((data) => {
+                addLoadedLocations([...loadedLocations, location])
                 setSelectedLocation(location);
             })
             .catch(() => {
