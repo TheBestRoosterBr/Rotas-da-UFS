@@ -1,0 +1,37 @@
+TAGS:
+
+Bloco A
+Bloco B
+Bloco C 
+Bloco D
+Sala de aula
+Banheiro
+Administração 
+Quimica 
+Biologia 
+Contabilidade 
+Sistemas de informação 
+Matemática
+Letras
+Geografia 
+Pedagogia 
+Secretaria
+Biblioteca
+Sala Professor
+Departamento
+Entrada
+Hall
+Corredor
+Pesquisa
+Laboratório
+Almoxarifado
+Auditório
+Extensões
+Bloco B
+CTI
+Rampa
+Sala Modular
+Resun
+Reuião
+Escada
+Física
