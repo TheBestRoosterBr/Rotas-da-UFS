@@ -22,6 +22,7 @@ import {
 } from './blocks/graph';
 
 import { ThemeMode } from '@/components/themeMode';
+import { useSearchParams } from 'react-router-dom';
 
 
 export function RoutePage(): ReactNode {
@@ -43,6 +44,7 @@ export function RoutePage(): ReactNode {
     const [vertices, setVertices] = useState<Vertex[]>([]);
     const [edges, setEdges] = useState<Edge[]>([]);
 
+    const [locations] = useSearchParams();
 
     function handleRunRoute(): void {
         alert('Implement run route!');
