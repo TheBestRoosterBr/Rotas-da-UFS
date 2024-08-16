@@ -4,19 +4,18 @@ import {
     useEffect,
     useRef,
     useState,
-    WheelEvent
 } from 'react';
 
 
-interface Vertex {
+export interface Vertex {
     id: number;
 
     x: number;
     y: number;
 }
 
-interface Edge {
-    origem: number;
+export interface Edge {
+    origin: number;
     destine: number;
 }
 
@@ -92,8 +91,8 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
                     <line
                         key={index}
 
-                        x1={props.vertices[edge.origem]?.x}
-                        y1={props.vertices[edge.origem]?.y}
+                        x1={props.vertices[edge.origin]?.x}
+                        y1={props.vertices[edge.origin]?.y}
 
                         x2={props.vertices[edge.destine]?.x}
                         y2={props.vertices[edge.destine]?.y}

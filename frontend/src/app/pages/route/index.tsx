@@ -1,5 +1,6 @@
 import {
     ReactNode,
+    useEffect,
     useState
 } from 'react';
 
@@ -14,7 +15,11 @@ import {
     TrafficSign
 } from '@phosphor-icons/react';
 
-import { GraphViewport } from './blocks/graph';
+import {
+    Edge,
+    GraphViewport,
+    Vertex
+} from './blocks/graph';
 
 import { ThemeMode } from '@/components/themeMode';
 
@@ -32,11 +37,82 @@ export function RoutePage(): ReactNode {
     const [searchAlgorithm, setSearchAlgorithm] = useState<number>(-1);
     const [isRunningRoute, setRunningRoute] = useState<boolean>(false);
 
+    const [isLoading, setLoading] = useState<number>(0);
+    const [error, setError] = useState<string | null>(null);
+
+    const [vertices, setVertices] = useState<Vertex[]>([]);
+    const [edges, setEdges] = useState<Edge[]>([]);
+
 
     function handleRunRoute(): void {
         alert('Implement run route!');
         setRunningRoute(true);
     }
+
+
+    useEffect(() => {
+        setLoading((prev) => prev + 1);
+
+        fetch('/api/busca/get_estados')
+            .then((res) => {
+                if (!res.ok) {
+                    setError('Não foi possível buscar os dados dos estados!');
+                    return;
+                }
+
+                return res.json();
+            })
+            .then((data: any) => {
+                console.log(data);
+                const vertices: Vertex[] = data.estados.map((vertex: any): Vertex => {
+                    return {
+                        id: vertex.id,
+
+                        x: Math.random() * 500,
+                        y: Math.random() * 500,
+                    };
+                });
+
+                setVertices(vertices);
+            })
+            .catch(() => {
+                setError('Ocorreu um erro');
+            })
+            .finally(() => {
+                setLoading((prev) => prev - 1);
+            });
+    }, []);
+
+    useEffect(() => {
+        setLoading((prev) => prev + 1);
+
+        fetch('/api/busca/get_transicoes')
+            .then((res) => {
+                if (!res.ok) {
+                    setError('Não foi possível buscar os dados das transições!');
+                    return;
+                }
+
+                return res.json();
+            })
+            .then((data: any) => {
+                const edges: Edge[] = data.transicoes.map((edge: any): Edge => {
+                    return {
+                        origin: edge.origem,
+                        destine: edge.destino,
+                    };
+                });
+
+                console.log(edges);
+                setEdges(edges);
+            })
+            .catch(() => {
+                setError('Ocorreu um erro');
+            })
+            .finally(() => {
+                setLoading((prev) => prev - 1);
+            });
+    }, []);
 
 
     return (
@@ -136,20 +212,8 @@ export function RoutePage(): ReactNode {
                 )}
 
                 <GraphViewport
-                    edges={[
-                        { origem: 0, destine: 1 },
-                        { origem: 1, destine: 2 },
-                        { origem: 2, destine: 3 },
-                        { origem: 3, destine: 4 },
-                        { origem: 0, destine: 3 },
-                    ]}
-                    vertices={[
-                        { id: 0, x: 100, y: 100 },
-                        { id: 1, x: 200, y: 150 },
-                        { id: 2, x: 300, y: 100 },
-                        { id: 3, x: 400, y: 200 },
-                        { id: 4, x: 500, y: 150 },
-                    ]}
+                    edges={edges}
+                    vertices={vertices}
 
                     className='flex-1' />
             </main>
