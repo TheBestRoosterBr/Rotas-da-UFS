@@ -130,9 +130,9 @@ export function RoutePage(): ReactNode {
                 <ThemeMode />
             </header>
 
-            <main className='flex flex-1 text-zinc-300'>
+            <main className='flex flex-1 relative text-zinc-300'>
                 {!isRunningRoute && (
-                    <div className='flex flex-col items-baseline justify-center text-zinc-900 space-y-4'>
+                    <div className='absolute z-10 top-[50%] bottom-[50%] flex flex-col items-baseline justify-center text-zinc-900 space-y-4'>
                         <button
                             onClick={() => setSearchAlgorithm(0)}
                             onMouseEnter={() => setSearchAlgorithmHover(0)}
@@ -218,7 +218,7 @@ export function RoutePage(): ReactNode {
                     className='flex-1' />
             </main>
 
-            <footer className='px-6 pb-5'>
+            <footer className='px-6 py-5'>
                 {!isRunningRoute ? (
                     <button
                         onClick={handleRunRoute}
