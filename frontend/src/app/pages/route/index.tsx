@@ -63,7 +63,6 @@ export function RoutePage(): ReactNode {
                 return res.json();
             })
             .then((data: any) => {
-                console.log(data);
                 const vertices: Vertex[] = data.estados.map((vertex: any): Vertex => {
                     return {
                         id: vertex.id,
@@ -103,7 +102,6 @@ export function RoutePage(): ReactNode {
                     };
                 });
 
-                console.log(edges);
                 setEdges(edges);
             })
             .catch(() => {
@@ -214,6 +212,9 @@ export function RoutePage(): ReactNode {
                 <GraphViewport
                     edges={edges}
                     vertices={vertices}
+
+                    origin={parseInt(locations.get('origin')!)}
+                    destination={parseInt(locations.get('destination')!)}
 
                     className='flex-1' />
             </main>

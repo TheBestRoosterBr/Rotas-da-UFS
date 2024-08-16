@@ -16,12 +16,15 @@ export interface Vertex {
 
 export interface Edge {
     origin: number;
-    destine: number;
+    destination: number;
 }
 
 interface GraphViewportProps {
     vertices: Vertex[];
     edges: Edge[];
+
+    origin: number;
+    destination: number;
 
     className?: string;
 }
@@ -94,8 +97,8 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
                         x1={props.vertices[edge.origin]?.x}
                         y1={props.vertices[edge.origin]?.y}
 
-                        x2={props.vertices[edge.destine]?.x}
-                        y2={props.vertices[edge.destine]?.y}
+                        x2={props.vertices[edge.destination]?.x}
+                        y2={props.vertices[edge.destination]?.y}
 
                         stroke='white' />
                 ))}

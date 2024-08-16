@@ -60,6 +60,16 @@ export function HomePage(): ReactNode {
     }, []);
 
 
+    const handleShowRoute = () => {
+        if (whereLocation === null || destinationLocation === null) {
+            alert('Mostrar error quando tentar ver rotas e não selecionar local e destino');
+            return;
+        }
+
+        navigate(`/route?origin=${whereLocation.id}&destination=${destinationLocation.id}`, { replace: true });
+    }
+
+
     return (
         <>
             <header>
