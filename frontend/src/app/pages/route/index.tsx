@@ -98,7 +98,7 @@ export function RoutePage(): ReactNode {
                 const edges: Edge[] = data.transicoes.map((edge: any): Edge => {
                     return {
                         origin: edge.origem,
-                        destine: edge.destino,
+                        destination: edge.destino,
                     };
                 });
 

@@ -11,6 +11,8 @@ import {
     useState
 } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 import { Modal } from './blocks/modal';
 
 import { ThemeMode } from '@/components/themeMode';
@@ -26,6 +28,8 @@ interface Location {
 
 
 export function HomePage(): ReactNode {
+    const navigate = useNavigate();
+
     const [whereLocation, setWhereLocation] = useState<Location | null>(null);
     const [isWhereModelOpen, setWhereModalOpen] = useState<boolean>(false);
 
@@ -142,6 +146,7 @@ export function HomePage(): ReactNode {
                                 </button>
 
                                 <button
+                                    onClick={handleShowRoute}
                                     className='bg-cyan-100 hover:bg-cyan-300 shadow-shadow text-cyan-950 dark:bg-cyan-300 dark:hover:bg-cyan-400 px-5 py-2 font-medium flex items-center gap-2 rounded-lg'>
                                     Mostrar rotas
                                     <ArrowRight
