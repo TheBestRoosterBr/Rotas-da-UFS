@@ -52,87 +52,89 @@ export function RoutePage(): ReactNode {
                 <ThemeMode />
             </header>
 
-            <main className='flex flex-1 items-center text-zinc-300'>
-                <div className='text-zinc-900 space-y-4'>
-                    <button
-                        onClick={() => setSearchAlgorithm(0)}
-                        onMouseEnter={() => setSearchAlgorithmHover(0)}
-                        onMouseLeave={() => setSearchAlgorithmHover(-1)}
-                        className={`flex items-center px-4 py-1.5 rounded-r-lg ${searchAlgorithm == 0 ? 'border-y border-r border-cyan-300 text-cyan-300' : 'bg-cyan-300'}`}>
-                        <ArrowsHorizontal
-                            className='size-6'
-                            weight='duotone' />
+            <main className='flex flex-1 text-zinc-300'>
+                {!isRunningRoute && (
+                    <div className='flex flex-col items-baseline justify-center text-zinc-900 space-y-4'>
+                        <button
+                            onClick={() => setSearchAlgorithm(0)}
+                            onMouseEnter={() => setSearchAlgorithmHover(0)}
+                            onMouseLeave={() => setSearchAlgorithmHover(-1)}
+                            className={`flex items-center px-4 py-1.5 rounded-r-lg ${searchAlgorithm == 0 ? 'border-y border-r border-cyan-300 text-cyan-300' : 'bg-cyan-300'}`}>
+                            <ArrowsHorizontal
+                                className='size-6'
+                                weight='duotone' />
 
-                        {searchAlgorithmHover === 0 && (
-                            <span className='mx-7'>
-                                {search_names[searchAlgorithmHover]}
-                            </span>
-                        )}
-                    </button>
-                    <button
-                        onClick={() => setSearchAlgorithm(1)}
-                        onMouseEnter={() => setSearchAlgorithmHover(1)}
-                        onMouseLeave={() => setSearchAlgorithmHover(-1)}
-                        className={`flex items-center px-4 py-1.5 rounded-r-lg ${searchAlgorithm == 1 ? 'border-y border-r border-cyan-300 text-cyan-300' : 'bg-cyan-300'}`}>
-                        <Skull
-                            className='size-6'
-                            weight='duotone' />
+                            {searchAlgorithmHover === 0 && (
+                                <span className='mx-7'>
+                                    {search_names[searchAlgorithmHover]}
+                                </span>
+                            )}
+                        </button>
+                        <button
+                            onClick={() => setSearchAlgorithm(1)}
+                            onMouseEnter={() => setSearchAlgorithmHover(1)}
+                            onMouseLeave={() => setSearchAlgorithmHover(-1)}
+                            className={`flex items-center px-4 py-1.5 rounded-r-lg ${searchAlgorithm == 1 ? 'border-y border-r border-cyan-300 text-cyan-300' : 'bg-cyan-300'}`}>
+                            <Skull
+                                className='size-6'
+                                weight='duotone' />
 
-                        {searchAlgorithmHover === 1 && (
-                            <span className='mx-7'>
-                                {search_names[searchAlgorithmHover]}
-                            </span>
-                        )}
-                    </button>
-                    <button
-                        onClick={() => setSearchAlgorithm(2)}
-                        onMouseEnter={() => setSearchAlgorithmHover(2)}
-                        onMouseLeave={() => setSearchAlgorithmHover(-1)}
-                        className={`flex items-center px-4 py-1.5 rounded-r-lg ${searchAlgorithm == 2 ? 'border-y border-r border-cyan-300 text-cyan-300' : 'bg-cyan-300'}`}>
-                        <Pizza
-                            className='size-6'
-                            weight='duotone' />
+                            {searchAlgorithmHover === 1 && (
+                                <span className='mx-7'>
+                                    {search_names[searchAlgorithmHover]}
+                                </span>
+                            )}
+                        </button>
+                        <button
+                            onClick={() => setSearchAlgorithm(2)}
+                            onMouseEnter={() => setSearchAlgorithmHover(2)}
+                            onMouseLeave={() => setSearchAlgorithmHover(-1)}
+                            className={`flex items-center px-4 py-1.5 rounded-r-lg ${searchAlgorithm == 2 ? 'border-y border-r border-cyan-300 text-cyan-300' : 'bg-cyan-300'}`}>
+                            <Pizza
+                                className='size-6'
+                                weight='duotone' />
 
-                        {searchAlgorithmHover === 2 && (
-                            <span className='mx-7'>
-                                {search_names[searchAlgorithmHover]}
-                            </span>
-                        )}
-                    </button>
-                    <button
-                        onClick={() => setSearchAlgorithm(3)}
-                        onMouseEnter={() => setSearchAlgorithmHover(3)}
-                        onMouseLeave={() => setSearchAlgorithmHover(-1)}
-                        className={`flex items-center px-4 py-1.5 rounded-r-lg ${searchAlgorithm == 3 ? 'border-y border-r border-cyan-300 text-cyan-300' : 'bg-cyan-300'}`}>
-                        <PiggyBank
-                            className='size-6'
-                            weight='duotone' />
+                            {searchAlgorithmHover === 2 && (
+                                <span className='mx-7'>
+                                    {search_names[searchAlgorithmHover]}
+                                </span>
+                            )}
+                        </button>
+                        <button
+                            onClick={() => setSearchAlgorithm(3)}
+                            onMouseEnter={() => setSearchAlgorithmHover(3)}
+                            onMouseLeave={() => setSearchAlgorithmHover(-1)}
+                            className={`flex items-center px-4 py-1.5 rounded-r-lg ${searchAlgorithm == 3 ? 'border-y border-r border-cyan-300 text-cyan-300' : 'bg-cyan-300'}`}>
+                            <PiggyBank
+                                className='size-6'
+                                weight='duotone' />
 
-                        {searchAlgorithmHover === 3 && (
-                            <span className='mx-7'>
-                                {search_names[searchAlgorithmHover]}
-                            </span>
-                        )}
-                    </button>
-                    <button
-                        onClick={() => setSearchAlgorithm(4)}
-                        onMouseEnter={() => setSearchAlgorithmHover(4)}
-                        onMouseLeave={() => setSearchAlgorithmHover(-1)}
-                        className={`flex items-center px-4 py-1.5 rounded-r-lg ${searchAlgorithm == 4 ? 'border-y border-r border-cyan-300 text-cyan-300' : 'bg-cyan-300'}`}>
-                        <Star
-                            className='size-6'
-                            weight='duotone' />
+                            {searchAlgorithmHover === 3 && (
+                                <span className='mx-7'>
+                                    {search_names[searchAlgorithmHover]}
+                                </span>
+                            )}
+                        </button>
+                        <button
+                            onClick={() => setSearchAlgorithm(4)}
+                            onMouseEnter={() => setSearchAlgorithmHover(4)}
+                            onMouseLeave={() => setSearchAlgorithmHover(-1)}
+                            className={`flex items-center px-4 py-1.5 rounded-r-lg ${searchAlgorithm == 4 ? 'border-y border-r border-cyan-300 text-cyan-300' : 'bg-cyan-300'}`}>
+                            <Star
+                                className='size-6'
+                                weight='duotone' />
 
-                        {searchAlgorithmHover === 4 && (
-                            <span className='mx-7'>
-                                {search_names[searchAlgorithmHover]}
-                            </span>
-                        )}
-                    </button>
-                </div>
+                            {searchAlgorithmHover === 4 && (
+                                <span className='mx-7'>
+                                    {search_names[searchAlgorithmHover]}
+                                </span>
+                            )}
+                        </button>
+                    </div>
+                )}
             </main>
 
-            <footer className='px-6 py-5'>
+            <footer className='px-6 pb-5'>
                 {!isRunningRoute ? (
                     <button
                         onClick={handleRunRoute}
