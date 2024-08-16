@@ -14,6 +14,8 @@ import {
     TrafficSign
 } from '@phosphor-icons/react';
 
+import { GraphViewport } from './blocks/graph';
+
 import { ThemeMode } from '@/components/themeMode';
 
 
@@ -132,6 +134,24 @@ export function RoutePage(): ReactNode {
                         </button>
                     </div>
                 )}
+
+                <GraphViewport
+                    edges={[
+                        { origem: 0, destine: 1 },
+                        { origem: 1, destine: 2 },
+                        { origem: 2, destine: 3 },
+                        { origem: 3, destine: 4 },
+                        { origem: 0, destine: 3 },
+                    ]}
+                    vertices={[
+                        { id: 0, x: 100, y: 100 },
+                        { id: 1, x: 200, y: 150 },
+                        { id: 2, x: 300, y: 100 },
+                        { id: 3, x: 400, y: 200 },
+                        { id: 4, x: 500, y: 150 },
+                    ]}
+
+                    className='flex-1' />
             </main>
 
             <footer className='px-6 pb-5'>
