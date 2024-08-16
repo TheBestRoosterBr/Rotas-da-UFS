@@ -1,4 +1,5 @@
-paraid,LUGAR,Latitude,Longitude,Descricao,Tags
+
+id,LUGAR,Latitude,Longitude,Descricao,Tags
 0,Entrada,-10.6817430,-37.4364287,"Entrada principal.","Entrada"
 1,Xerox,-10.6817772,-37.4357699,"Fornece serviços de cópias e impressões.","Hall"
 2,Curva Estufa,-10.6815710,-37.4361143,"Curva de acesso à estufa.","Corredor"
