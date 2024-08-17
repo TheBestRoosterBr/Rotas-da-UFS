@@ -19,6 +19,14 @@ class Reader:
         self.transicoes = []
         self.read()
 
+    def get_filtros(self):
+        filtros = []
+        for estado in self.estados:
+            for filtro in estado.filtros:
+                if filtro not in filtros:
+                    filtros.append(filtro)
+        return filtros
+
     def read(self):
         tree = ET.parse(self.pathMapa)
         root = tree.getroot()
@@ -58,7 +66,11 @@ class Reader:
             if estado is not None:
                 estado.nome_completo = name
                 estado.descricao = descricao
-                estado.filtros = tags
+                filtros = tags.split(",")
+                for filtro in filtros:
+                    filtro = filtro.strip()
+                    if filtro != "":
+                        estado.filtros.append(filtro)
                 estado.latitude = conversor(latitude)
                 estado.longitude = conversor(longitude)
         self.graph = Grafo(self.estados, self.transicoes)

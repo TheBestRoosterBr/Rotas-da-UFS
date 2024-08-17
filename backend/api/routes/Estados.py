@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify
 from flask.blueprints import Blueprint
 from backend.graphToolsVol2.Reader import Reader
 
-
 router = Blueprint('Estados', __name__)
 
 PATH_MAPA = '../Mapa/mapa.jff'
@@ -36,3 +35,10 @@ def get_estado(id):
                     'descricao': estado.descricao, 'filtros': estado.filtros,
                     'x': estado.latitude, 'y': estado.longitude,
                     'imagem': estado.nome + ".png"}), 200
+
+
+@router.route('/filtro', methods=['GET'])
+def get_filtros():
+    reader = Reader(PATH_MAPA, PATH_DATA)
+    filtros = reader.get_filtros()
+    return jsonify(filtros)
