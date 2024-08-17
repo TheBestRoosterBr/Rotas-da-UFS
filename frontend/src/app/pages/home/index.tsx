@@ -45,7 +45,7 @@ export function HomePage(): ReactNode {
             .then((data: any) => {
                 const locations: Location[] = data.map((location: any): Location => {
                     return {
-                        id: parseInt(location.id) + 1,
+                        id: parseInt(location.id),
                         name: location.nome,
                         title: location.titulo,
                     };

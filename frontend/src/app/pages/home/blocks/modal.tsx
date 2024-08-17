@@ -152,7 +152,7 @@ export function Modal(props: ModalProps) {
                                     <div
                                         key={selectedLocation.id}
                                         className='absolute inset-0 flex item-center justify-between rounded-lg px-4 py-1 h-8 text-start  dark:bg-cyan-300'>
-                                        {selectedLocation.name}
+                                        {selectedLocation.title ?? selectedLocation.name}
 
                                         <button
                                             onClick={() => setSelectedLocation(null)}
