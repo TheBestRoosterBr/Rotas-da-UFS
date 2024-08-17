@@ -9,41 +9,35 @@ class BuscaAEstrela:
         self.achou = False
         self.custo = 0
 
-    def busca(self, grafo, inicio, fim):
+    def busca(self, grafo, inicio, fim):  # deve retornar o caminho entre o inicio e o fim no grafo
         self.fronteira.append(inicio)
-        self.visitados.append(inicio)
-
+        inicio.custo = 0
         while len(self.fronteira) > 0:
-            self.fronteira = sorted(self.fronteira, key=lambda estado: estado.custo)
-            estado_atual = self.fronteira.pop(0)
-
-            if estado_atual == fim:
+            self.fronteira.sort(key=lambda x: x.custo)
+            estado = self.fronteira.pop(0)
+            self.visitados.append(estado)
+            if estado == fim:
                 self.achou = True
                 break
-
             for transicao in grafo.transicoes:
-                if transicao.origem == estado_atual:
-                    custo = heuristica(estado_atual, transicao.destino) + transicao.distancia
+                if transicao.origem == estado:
                     if transicao.destino not in self.visitados:
-                        transicao.destino.custo = custo
-                        self.fronteira.append(transicao.destino)
-                        self.visitados.append(transicao.destino)
-                        transicao.destino.anterior = estado_atual
-                    else:
-                        if custo < transicao.destino.custo:
-                            transicao.destino.custo = custo
-                            transicao.destino.anterior = estado_atual
-
+                        if transicao.destino not in self.fronteira:
+                            self.fronteira.append(transicao.destino)
+                            transicao.destino.anterior = estado
+                            transicao.destino.custo = estado.custo + heuristica(transicao.destino, estado)
+                        else:
+                            if transicao.destino.custo > estado.custo + heuristica(transicao.destino, estado):
+                                transicao.destino.anterior = estado
+                                transicao.destino.custo = estado.custo + heuristica(transicao.destino, estado)
         if self.achou:
             self.caminho.append(fim)
-            while fim.anterior is not None:
-                self.caminho.append(fim.anterior)
-                fim = fim.anterior
+            anterior = fim.anterior
+            while anterior is not None:
+                self.caminho.append(anterior)
+                anterior = anterior.anterior
             self.caminho.reverse()
-            self.custo = self.caminho[-1].custo
-            return self.caminho
-        else:
-            return None
+            self.custo = fim.custo
 
     def ordem_expansao_nodos(self):
         return self.visitados

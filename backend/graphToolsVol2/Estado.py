@@ -8,6 +8,7 @@ class Estado:
         self.descricao = ""
         self.filtros = []
         self.anterior = None
+        self.custo = 0
 
     def visit(self, visitor):
         visitor.visit(self)

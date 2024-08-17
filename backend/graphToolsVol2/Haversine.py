@@ -29,3 +29,8 @@ def haversine(lat1, lon1, lat2, lon2):
 
 def heuristica(estado1, estado2):
     return haversine(estado1.latitude, estado1.longitude, estado2.latitude, estado2.longitude)
+
+
+def preencher_custo(grafo, inicio):
+    for estado in grafo.estados:
+        estado.custo = heuristica(estado, inicio)

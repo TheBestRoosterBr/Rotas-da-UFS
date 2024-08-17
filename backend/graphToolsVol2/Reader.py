@@ -5,6 +5,11 @@ from backend.graphToolsVol2.Transicao import Transicao
 import pandas as pd
 
 
+def conversor(original_string):
+    original_string = original_string.replace(",", ".")
+    return float(original_string)
+
+
 class Reader:
     def __init__(self, path_mapa, path_data):
         self.pathMapa = path_mapa
@@ -25,7 +30,7 @@ class Reader:
             if child.tag == 'automaton':
                 for state in child:
                     if state.tag == 'state':
-                        id = state.attrib['id']
+                        id = int(state.attrib['id'])
                         name = state.attrib['name']
                         estado = Estado(id, name)
                         self.estados.append(estado)
@@ -34,25 +39,26 @@ class Reader:
 
                     if state.tag == 'transition':
                         # Usa o mapeamento para obter os objetos Estado completos pelos IDs
-                        origem = id_to_estado[state[0].text]
-                        destino = id_to_estado[state[1].text]
-                        distancia = state[2].text
+                        origem = id_to_estado[int(state[0].text)]
+                        destino = id_to_estado[int(state[1].text)]
+                        distancia_s = state[2].text
+                        distancia = conversor(distancia_s)
                         self.transicoes.append(Transicao(origem, destino, distancia))
         df = pd.read_csv(self.pathData)
         # paraid,LUGAR,Latitude,Longitude,Descricao,Tags
         # 12, Entrada da vivenvcia ,"-10,6817430","-37,4364287"
         for index, row in df.iterrows():
-            id = row['paraid']
+            id = int(row['paraid'])
             name = row['LUGAR']
             descricao = row['Descricao']
             tags = row['Tags']
             latitude = row['Latitude']
             longitude = row['Longitude']
-            estado = next((estado for estado in self.estados if estado.id == str(id)), None)
+            estado = next((estado for estado in self.estados if estado.id == id), None)
             if estado is not None:
                 estado.nome_completo = name
                 estado.descricao = descricao
                 estado.filtros = tags
-                estado.latitude = latitude
-                estado.longitude = longitude
+                estado.latitude = conversor(latitude)
+                estado.longitude = conversor(longitude)
         self.graph = Grafo(self.estados, self.transicoes)
