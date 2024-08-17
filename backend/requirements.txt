@@ -7,3 +7,6 @@ gunicorn>=22.0.0
 # Load environment variables from .env file(s)
 python-dotenv>=1.0.1
 
+#carrega arquivos csv (vsfd jonathan canso de ingles)
+pandas>=2.2.2
+
