@@ -45,6 +45,9 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
 
 
     const handleMouseDown = (event: MouseEvent<SVGSVGElement>): void => {
+        if (props.location !== null)
+            return;
+
         setIsDragging(true);
         setStartDrag({
             x: event.clientX,
@@ -99,6 +102,36 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
             svg.removeEventListener('mouseleave', localHandleMouseUp);
         };
     }, [isDragging, startDrag]);
+
+    useEffect(() => {
+        // Following a route?
+        if (props.location === null) {
+            scale.current = 2;
+
+            setOffset({
+                x: 0,
+                y: 0,
+            })
+
+            return;
+        }
+
+        // Following, then set zoom in on current location
+        scale.current = 10;
+
+        // Focus on location
+        if (svgRef.current == null)
+            return;
+
+        const { width, height } = svgRef.current?.getBoundingClientRect();
+        const vertex = props.vertices.find((vertex) => vertex.id == props.location);
+
+        setOffset({
+            x: (width / 2) - (vertex!.x * scale.current),
+            y: (height / 2) - (vertex!.y * scale.current),
+        });
+    }, [props.location]);
+
 
     return (
         <svg

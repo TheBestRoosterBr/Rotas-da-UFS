@@ -77,7 +77,7 @@ export function RoutePage(): ReactNode {
             return;
         }
 
-        setLocation(path[index]!);
+        setLocation(path[index + 1]!);
     }
 
     function handleAlgorithmSelection(algorithm: number): void {
