@@ -39,9 +39,6 @@ export function Modal(props: ModalProps) {
     const [search, setSearch] = useState<string>('');
     const [loadedLocations, setLoadedLocations] = useState<Location[]>([]);
 
-    const [isLoading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string | null>(null);
-
     const locations = useMemo(() => {
         return [...props.locations].filter((item) => {
             if (props.currentLocation === null)
@@ -66,11 +63,9 @@ export function Modal(props: ModalProps) {
             return;
         }
 
-        setLoading(true);
         fetch(`/api/estado/${location.id}`)
             .then((res) => {
                 if (!res.json()) {
-                    setError('Não foi possível obter os dados do estado!');
                     return;
                 }
 
@@ -92,10 +87,8 @@ export function Modal(props: ModalProps) {
                 setSelectedLocation(newLocation);
             })
             .catch(() => {
-                setError('Ocorreu um erro');
             })
             .finally(() => {
-                setLoading(false);
             });
     }
 
@@ -207,49 +200,45 @@ export function Modal(props: ModalProps) {
                     <div className='w-px h-72 my-auto bg-zinc-600' />
 
                     {/* Preview column */}
-                    {!isLoading ? (
-                        selectedLocation !== null ? (
-                            <div className='flex flex-1 h-full flex-col items-center'>
-                                {/* Location informations */}
-                                <div className='flex flex-1 h-full flex-col items-center space-y-1.5'>
-                                    {/* Location image */}
-                                    <div className='w-56 h-44 bg-zinc-400' />
+                    {selectedLocation !== null ? (
+                        <div className='flex flex-1 h-full flex-col items-center'>
+                            {/* Location informations */}
+                            <div className='flex flex-1 h-full flex-col items-center space-y-1.5'>
+                                {/* Location image */}
+                                <div className='w-56 h-44 bg-zinc-400' />
 
-                                    {/* Horizontal separator */}
-                                    <div className='w-48 h-px bg-zinc-600' />
+                                {/* Horizontal separator */}
+                                <div className='w-48 h-px bg-zinc-600' />
 
-                                    {/* Location tile & description */}
-                                    <div className='w-full text-zinc-300 text-sm space-y-2'>
-                                        <span className='flex justify-center text-center font-bold'>
-                                            {selectedLocation.title ?? selectedLocation.name}
-                                        </span>
+                                {/* Location tile & description */}
+                                <div className='w-full text-zinc-300 text-sm space-y-2'>
+                                    <span className='flex justify-center text-center font-bold'>
+                                        {selectedLocation.title ?? selectedLocation.name}
+                                    </span>
 
-                                        {selectedLocation.description !== undefined && (
-                                            <pre className='h-28 text-wrap overflow-y-auto'>
-                                                {selectedLocation.description}
-                                            </pre>
-                                        )}
-                                    </div>
-                                </div>
-
-                                <div className='flex w-full items-center justify-end'>
-                                    <button
-                                        onClick={handleConfirmLocation}
-                                        className='flex px-3 py-1.5 gap-2 items-center rounded-lg text-sm dark:bg-cyan-300'>
-                                        Confirmar
-                                        <ArrowRight
-                                            className='size-5' />
-                                    </button>
+                                    {selectedLocation.description !== undefined && (
+                                        <pre className='h-28 text-wrap overflow-y-auto'>
+                                            {selectedLocation.description}
+                                        </pre>
+                                    )}
                                 </div>
                             </div>
-                        ) : (
-                            <div className='flex flex-1 h-full items-center justify-center'>
-                                <MapPinArea
-                                    className='size-52 text-zinc-400' />
+
+                            <div className='flex w-full items-center justify-end'>
+                                <button
+                                    onClick={handleConfirmLocation}
+                                    className='flex px-3 py-1.5 gap-2 items-center rounded-lg text-sm dark:bg-cyan-300'>
+                                    Confirmar
+                                    <ArrowRight
+                                        className='size-5' />
+                                </button>
                             </div>
-                        )
+                        </div>
                     ) : (
-                        <p>Loading</p>
+                        <div className='flex flex-1 h-full items-center justify-center'>
+                            <MapPinArea
+                                className='size-52 text-zinc-400' />
+                        </div>
                     )}
                 </div>
             </div>

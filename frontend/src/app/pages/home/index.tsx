@@ -32,17 +32,11 @@ export function HomePage(): ReactNode {
 
     const [locationsList, setLocationsList] = useState<Location[]>([]);
 
-    const [isLoading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string | null>(null);
-
 
     useEffect(() => {
-        setLoading(true);
-
         fetch('/api/estado')
             .then((res) => {
                 if (!res.ok) {
-                    setError('Não foi possível buscar a lista de estados!');
                     return;
                 }
 
@@ -60,10 +54,8 @@ export function HomePage(): ReactNode {
                 setLocationsList(locations);
             })
             .catch(() => {
-                setError('Ocorreu um erro');
             })
             .finally(() => {
-                setLoading(false);
             });
     }, []);
 

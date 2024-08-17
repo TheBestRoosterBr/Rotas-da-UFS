@@ -47,9 +47,6 @@ export function RoutePage(): ReactNode {
 
     const [isRunningRoute, setRunningRoute] = useState<boolean>(false);
 
-    const [isLoading, setLoading] = useState<number>(0);
-    const [error, setError] = useState<string | null>(null);
-
     const [vertices, setVertices] = useState<Vertex[]>([]);
     const [edges, setEdges] = useState<Edge[]>([]);
 
@@ -60,7 +57,6 @@ export function RoutePage(): ReactNode {
 
     function handleRunRoute(): void {
         if (searchAlgorithm === -1) {
-            setError('O algoritmo de busca deve ser selecionado!');
             return;
         }
 
@@ -91,7 +87,6 @@ export function RoutePage(): ReactNode {
         if (cached.length > 0)
             return;
 
-        setLoading((prev) => prev + 1);
         fetch(`/api/busca/${searchNames[algorithm]?.toLowerCase().replace(' ', '_')}`, {
                 method: 'POST',
                 headers: {
@@ -104,7 +99,6 @@ export function RoutePage(): ReactNode {
             })
             .then((res) => {
                 if (!res.ok) {
-                    setError('Não foi possível buscar os dados dos estados!');
                     return;
                 }
 
@@ -119,21 +113,16 @@ export function RoutePage(): ReactNode {
                 setSearchsPathCache([...searchsPathCache, searchPath]);
             })
             .catch(() => {
-                setError('Ocorreu um erro');
             })
             .finally(() => {
-                setLoading((prev) => prev - 1);
             });
     }
 
 
     useEffect(() => {
-        setLoading((prev) => prev + 1);
-
         fetch('/api/estado')
             .then((res) => {
                 if (!res.ok) {
-                    setError('Não foi possível buscar os dados dos estados!');
                     return;
                 }
 
@@ -153,20 +142,15 @@ export function RoutePage(): ReactNode {
                 setVertices(vertices);
             })
             .catch(() => {
-                setError('Ocorreu um erro');
             })
             .finally(() => {
-                setLoading((prev) => prev - 1);
             });
     }, []);
 
     useEffect(() => {
-        setLoading((prev) => prev + 1);
-
         fetch('/api/transicao')
             .then((res) => {
                 if (!res.ok) {
-                    setError('Não foi possível buscar os dados das transições!');
                     return;
                 }
 
@@ -183,10 +167,8 @@ export function RoutePage(): ReactNode {
                 setEdges(edges);
             })
             .catch(() => {
-                setError('Ocorreu um erro');
             })
             .finally(() => {
-                setLoading((prev) => prev - 1);
             });
     }, []);
 
