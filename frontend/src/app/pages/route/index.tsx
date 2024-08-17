@@ -53,17 +53,35 @@ export function RoutePage(): ReactNode {
     const [vertices, setVertices] = useState<Vertex[]>([]);
     const [edges, setEdges] = useState<Edge[]>([]);
 
+    const [location, setLocation] = useState<number>(-1);
+
     const [queryParams] = useSearchParams();
 
 
     function handleRunRoute(): void {
         if (searchAlgorithm === -1) {
-            alert('Select search algorithm')
+            setError('O algoritmo de busca deve ser selecionado!');
             return;
         }
 
-        alert('Implement run route!');
         setRunningRoute(true);
+        setLocation(parseInt(queryParams.get('origin')!));
+    }
+
+    function handleNextLocation(): void {
+        const path = searchsPathCache[searchAlgorithm]!.path;
+
+        let index = Infinity;
+        for (index of path.keys())
+            if (path[index] == location)
+                break;
+
+        if (index + 1 > path.length) {
+            alert('Possible at destination!');
+            return;
+        }
+
+        setLocation(path[index]!);
     }
 
     function handleAlgorithmSelection(algorithm: number): void {
@@ -274,6 +292,7 @@ export function RoutePage(): ReactNode {
                     vertices={vertices}
 
                     origin={parseInt(queryParams.get('origin')!)}
+                    location={isRunningRoute ? location : null}
                     destination={parseInt(queryParams.get('destination')!)}
 
                     className='flex-1' />
@@ -293,7 +312,7 @@ export function RoutePage(): ReactNode {
                 ) : (
                     <div className='flex items-center justify-between'>
                         <button
-                            onClick={() => alert('implement cancel route')}
+                            onClick={() => setRunningRoute(false)}
                             className='hover:bg-cyan-300 shadow-shadow text-cyan-950 dark:bg-cyan-300 dark:hover:bg-cyan-400 px-5 py-2 font-medium flex items-center gap-2 rounded-lg'>
                             Cancelar
 
@@ -304,7 +323,7 @@ export function RoutePage(): ReactNode {
                         </button>
 
                         <button
-                            onClick={() => alert('implement next loc')}
+                            onClick={handleNextLocation}
                             className='ml-auto hover:bg-cyan-300 shadow-shadow text-cyan-950 dark:bg-cyan-300 dark:hover:bg-cyan-400 px-5 py-2 font-medium flex items-center gap-2 rounded-lg'>
                             Próximo local
 
