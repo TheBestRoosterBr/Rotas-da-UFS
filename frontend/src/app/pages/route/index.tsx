@@ -46,7 +46,13 @@ export function RoutePage(): ReactNode {
 
     const [locations] = useSearchParams();
 
+
     function handleRunRoute(): void {
+        if (searchAlgorithm === -1) {
+            alert('Select search algorithm')
+            return;
+        }
+
         alert('Implement run route!');
         setRunningRoute(true);
     }
