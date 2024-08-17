@@ -16,15 +16,16 @@ PATH_DATA = '../Mapa/custo.csv'
 def get_estados():
     reader = Reader(PATH_MAPA, PATH_DATA)
     estados = reader.estados
-    return jsonify({'estados': [{'id': estado.id, 'nome': estado.nome_completo} for estado in estados]})
+    return jsonify({'estados': [{'id': estado.id, 'nome': estado.nome, 'titulo': estado.nome_completo} for
+                                estado in estados]})
 
 
 @router.route('/get_transicoes', methods=['GET'])
 def get_transicoes():
-    reader = Reader(PATH_MAPA, )
+    reader = Reader(PATH_MAPA, PATH_DATA)
     transicoes = reader.transicoes
-    return jsonify({'transicoes': [{'origem': transicao.origem.id, 'destino': transicao.destino.id,
-                                    'distancia': transicao.distancia} for transicao in transicoes]})
+    return jsonify({'transicoes': [{'origem': transicao.origem.id, 'destino': transicao.destino.id}
+                                   for transicao in transicoes]})
 
 
 @router.route('/get_estado', methods=['GET'])
@@ -38,19 +39,19 @@ def get_estado():
     return jsonify({'estado': {'id': estado.id, 'nome': estado.nome_completo,
                                'descricao': estado.descricao, 'filtros': estado.filtros,
                                'latitude': estado.latitude, 'longitude': estado.longitude,
-                               'image_path': "../imagens/" + estado.nome + ".png"}})
+                               'image_path': estado.nome + ".png"}})
 
 
 @router.route('/busca_a_estrela', methods=['POST'])
 def busca_a_estrela():
     data = request.json
-    inicio = data['inicio']
-    fim = data['fim']
+    ini = data['inicio']
+    f = data['fim']
     reader = Reader(PATH_MAPA, PATH_DATA)
     busca = BuscaAEstrela()
     estados = reader.estados
-    inicio = next((estado for estado in estados if estado.id == inicio), None)
-    fim = next((estado for estado in estados if estado.id == fim), None)
+    inicio = next((estado for estado in estados if estado.id == ini), None)
+    fim = next((estado for estado in estados if estado.id == f), None)
     busca.busca(reader.graph, inicio, fim)
     return jsonify({'caminho': [estado.id for estado in busca.caminho]}, {'custo': busca.custo},
                    {'ordem_expansao': [estado.id for estado in busca.ordem_expansao_nodos()]})

@@ -39,10 +39,10 @@ class Reader:
                         distancia = state[2].text
                         self.transicoes.append(Transicao(origem, destino, distancia))
         df = pd.read_csv(self.pathData)
-        # id, LUGAR,Latitude,Longitude,Descricao,Tags
+        # paraid,LUGAR,Latitude,Longitude,Descricao,Tags
         # 12, Entrada da vivenvcia ,"-10,6817430","-37,4364287"
         for index, row in df.iterrows():
-            id = row['id']
+            id = row['paraid']
             name = row['LUGAR']
             descricao = row['Descricao']
             tags = row['Tags']
