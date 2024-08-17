@@ -39,7 +39,7 @@ export function HomePage(): ReactNode {
     useEffect(() => {
         setLoading(true);
 
-        fetch('/api/busca/get_estados')
+        fetch('/api/estado')
             .then((res) => {
                 if (!res.ok) {
                     setError('Não foi possível buscar a lista de estados!');

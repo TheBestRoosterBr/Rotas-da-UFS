@@ -67,7 +67,7 @@ export function Modal(props: ModalProps) {
         }
 
         setLoading(true);
-        fetch(`/api/busca/get_estado?id=${location.id}`)
+        fetch(`/api/estado/${location.id}`)
             .then((res) => {
                 if (!res.json()) {
                     setError('Não foi possível obter os dados do estado!');
