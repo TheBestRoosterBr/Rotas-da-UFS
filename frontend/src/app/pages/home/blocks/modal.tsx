@@ -186,8 +186,8 @@ export function Modal(props: ModalProps) {
                                     <button
                                         key={location.id}
                                         onClick={() => handleSelection(location)}
-                                        className='rounded-lg px-4 py-1 h-8 text-start text-zinc-300 bg-zinc-800'>
-                                        {location.name}
+                                        className='rounded-lg w-80 px-4 py-1 h-auto text-start text-zinc-300 bg-zinc-800'>
+                                        {location.title ?? location.name}
                                     </button>
                                 );
                             })}
