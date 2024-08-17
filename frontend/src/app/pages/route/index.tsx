@@ -67,10 +67,11 @@ export function RoutePage(): ReactNode {
             .then((data: any) => {
                 const vertices: Vertex[] = data.estados.map((vertex: any): Vertex => {
                     return {
-                        id: vertex.id,
+                        id: parseInt(vertex.id),
+                        title: vertex.titulo,
 
-                        x: Math.random() * 500,
-                        y: Math.random() * 500,
+                        x: parseFloat(vertex.x) ?? Math.random() * 500,
+                        y: parseFloat(vertex.y) ?? Math.random() * 500,
                     };
                 });
 
@@ -99,8 +100,8 @@ export function RoutePage(): ReactNode {
             .then((data: any) => {
                 const edges: Edge[] = data.transicoes.map((edge: any): Edge => {
                     return {
-                        origin: edge.origem,
-                        destination: edge.destino,
+                        origin: parseInt(edge.origem),
+                        destination: parseInt(edge.destino),
                     };
                 });
 

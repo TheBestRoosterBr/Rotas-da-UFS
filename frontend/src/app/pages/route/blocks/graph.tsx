@@ -9,6 +9,7 @@ import {
 
 export interface Vertex {
     id: number;
+    title: string;
 
     x: number;
     y: number;
@@ -103,21 +104,23 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
                         stroke='white' />
                 ))}
 
-                {props.vertices.map((vertex) => (
-                    <circle
-                        key={vertex.id}
+                {props.vertices.map((vertex) => {
+                    return (
+                        <circle
+                            key={vertex.id}
 
-                        r={10}
-                        cx={vertex.x}
-                        cy={vertex.y}
+                            r={10}
+                            cx={vertex.x}
+                            cy={vertex.y}
 
-                        stroke='white'
-                        strokeWidth={2}
+                            stroke='white'
+                            strokeWidth={2}
 
-                        fill='currentColor'
+                            fill='currentColor'
 
-                        className='text-zinc-600' />
-                ))}
+                            className='text-zinc-600' />
+                    );
+                })}
             </g>
         </svg>
     );
