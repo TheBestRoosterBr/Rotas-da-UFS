@@ -179,7 +179,10 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
                         x2={props.vertices[edge.destination]?.x}
                         y2={props.vertices[edge.destination]?.y}
 
-                        stroke='white' />
+                        className={props.path !== null && props.path.some((id) => id == edge.origin || id == edge.destination) ?
+                            'text-cyan-300' : 'text-zinc-600'}
+
+                        stroke='currentColor' />
                 ))}
 
                 {props.vertices.map((vertex) => {
@@ -196,7 +199,8 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
 
                             fill='currentColor'
 
-                            className='text-zinc-600' />
+                            className={props.path !== null && props.path.some((id) => id == vertex.id) ?
+                               'text-cyan-300' : 'text-zinc-600'} />
                     );
                 })}
             </g>
