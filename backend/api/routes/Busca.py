@@ -68,3 +68,19 @@ def busca_gulosa():
     fim = next((estado for estado in estados if estado.id == f), None)
     busca.busca(reader.graph, inicio, fim)
     return jsonify([estado.id for estado in busca.caminho]), 200
+
+
+@router.route('/custo_uniform', methods=['POST'])
+def custo_uniform():
+    data = request.json
+    ini = data['inicio']
+    f = data['fim']
+    reader = Reader(PATH_MAPA, PATH_DATA)
+    busca = custo_uniform()
+    estados = reader.estados
+    inicio = next((estado for estado in estados if estado.id == ini), None)
+    fim = next((estado for estado in estados if estado.id == f), None)
+    busca.busca(reader.graph, inicio, fim)
+    return jsonify([estado.id for estado in busca.caminho]), 200
+
+

@@ -57,6 +57,7 @@ export function Modal(props: ModalProps) {
     }
 
     function handleSelection(location: Location): void {
+
         const cached = loadedLocations.filter((item) => item.id == location.id);
         if (cached.length > 0) {
             setSelectedLocation(cached[0]!);
@@ -65,24 +66,19 @@ export function Modal(props: ModalProps) {
 
         fetch(`/api/estado/${location.id}`)
             .then((res) => {
-                if (!res.json()) {
+                if (!res.ok) {
                     return;
                 }
-
                 return res.json();
             })
             .then((data: any) => {
-                const newLocation: Location = data.map((location: any): Location => {
-                    return {
-                        id: parseInt(location.id),
-                        name: location.nome,
-                        title: location.titulo,
-
-                        image: location.imagem,
-                        description: location.descricao,
-                    };
-                });
-
+                const newLocation: Location = {
+                    id: location.id,
+                    name: location.name,
+                    title: location.title,
+                    image: '../imagens/' + data.imagem,
+                    description: data.descricao
+                }
                 setLoadedLocations([...loadedLocations, newLocation]);
                 setSelectedLocation(newLocation);
             })

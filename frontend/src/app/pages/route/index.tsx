@@ -67,6 +67,7 @@ export function RoutePage(): ReactNode {
     function handleNextLocation(): void {
         const path = searchsPathCache[searchAlgorithm]!.path;
 
+        console.log(path);
         let index = Infinity;
         for (index of path.keys())
             if (path[index] == location)
@@ -81,11 +82,12 @@ export function RoutePage(): ReactNode {
     }
 
     function handleAlgorithmSelection(algorithm: number): void {
-        setSearchAlgorithm(algorithm);
 
         const cached = searchsPathCache.filter((path: SearchPath) => path.search == algorithm);
-        if (cached.length > 0)
+        if (cached.length > 0){
+            setSearchAlgorithm(algorithm);
             return;
+        }
 
         fetch(`/api/busca/${searchNames[algorithm]?.toLowerCase().replace(' ', '_')}`, {
                 method: 'POST',
@@ -115,6 +117,7 @@ export function RoutePage(): ReactNode {
             .catch(() => {
             })
             .finally(() => {
+                setSearchAlgorithm(algorithm);
             });
     }
 
@@ -125,17 +128,15 @@ export function RoutePage(): ReactNode {
                 if (!res.ok) {
                     return;
                 }
-
                 return res.json();
             })
             .then((data: any) => {
-                const vertices: Vertex[] = data.estados.map((vertex: any): Vertex => {
+                const vertices: Vertex[] = data.map((vertex: any): Vertex => {
                     return {
-                        id: parseInt(vertex.id),
+                        id: vertex.id,
                         title: vertex.titulo,
-
-                        x: parseFloat(vertex.x) ?? Math.random() * 500,
-                        y: parseFloat(vertex.y) ?? Math.random() * 500,
+                        x: Math.random() * 500,
+                        y: Math.random() * 500,
                     };
                 });
 
@@ -157,7 +158,7 @@ export function RoutePage(): ReactNode {
                 return res.json();
             })
             .then((data: any) => {
-                const edges: Edge[] = data.transicoes.map((edge: any): Edge => {
+                const edges: Edge[] = data.map((edge: any): Edge => {
                     return {
                         origin: parseInt(edge.origem),
                         destination: parseInt(edge.destino),

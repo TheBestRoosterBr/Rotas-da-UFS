@@ -32,7 +32,7 @@ def get_estado(id):
     estado = next((estado for estado in estados if estado.id == id), None)
     if estado is None:
         return jsonify({"error": "nao tem esse estado"}), 404
-    return jsonify({'id': estado.id, 'nome': estado.nome_completo,
+    return jsonify({'id': estado.id, 'nome': estado.nome, 'titulo': estado.nome_completo,
                     'descricao': estado.descricao, 'filtros': estado.filtros,
                     'x': estado.latitude, 'y': estado.longitude,
-                    'image_path': estado.nome + ".png"}), 200
+                    'imagem': estado.nome + ".png"}), 200

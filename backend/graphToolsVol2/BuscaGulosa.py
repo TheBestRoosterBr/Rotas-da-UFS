@@ -21,9 +21,8 @@ class BuscaGulosa:
 
             if not transicoes_validas:
                 return None
-
             # Escolhe a transição com o menor valor heurístico (custo estimado até o objetivo)
-            proxima_transicao = min(transicoes_validas, key=lambda t: heuristica(t.destino, objetivo))
+            proxima_transicao = min(transicoes_validas, key=lambda t: heuristica(objetivo, t.destino))
 
             atual = proxima_transicao.destino
             self.caminho.append(atual)
