@@ -55,6 +55,8 @@ export function RoutePage(): ReactNode {
     const [queryParams] = useSearchParams();
 
 
+    const getSearchPath = (): SearchPath => searchsPathCache.find((search) => search.search == searchAlgorithm)!;
+
     function handleRunRoute(): void {
         if (searchAlgorithm === -1) {
             return;
@@ -65,15 +67,14 @@ export function RoutePage(): ReactNode {
     }
 
     function handleNextLocation(): void {
-        const path = searchsPathCache[searchAlgorithm]!.path;
+        const path = getSearchPath().path;
 
-        console.log(path);
         let index = Infinity;
         for (index of path.keys())
             if (path[index] == location)
                 break;
 
-        if (index + 1 > path.length) {
+        if (index + 1 >= path.length) {
             alert('Possible at destination!');
             return;
         }
@@ -82,9 +83,8 @@ export function RoutePage(): ReactNode {
     }
 
     function handleAlgorithmSelection(algorithm: number): void {
-
-        const cached = searchsPathCache.filter((path: SearchPath) => path.search == algorithm);
-        if (cached.length > 0){
+        const cached = searchsPathCache.filter((search: SearchPath) => search.search == algorithm);
+        if (cached.length > 0) {
             setSearchAlgorithm(algorithm);
             return;
         }
@@ -95,8 +95,8 @@ export function RoutePage(): ReactNode {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    inicio: queryParams.get('origin'),
-                    fim: queryParams.get('destination'),
+                    inicio: parseInt(queryParams.get('origin')!),
+                    fim: parseInt(queryParams.get('destination')!),
                 })
             })
             .then((res) => {
@@ -135,8 +135,9 @@ export function RoutePage(): ReactNode {
                     return {
                         id: vertex.id,
                         title: vertex.titulo,
-                        x: Math.random() * 500,
-                        y: Math.random() * 500,
+
+                        x: parseFloat(vertex.x),
+                        y: parseFloat(vertex.y),
                     };
                 });
 
@@ -271,7 +272,7 @@ export function RoutePage(): ReactNode {
                 )}
 
                 <GraphViewport
-                    path={searchAlgorithm > -1 ? searchsPathCache[searchAlgorithm]!.path : null}
+                    path={searchAlgorithm > -1 ? getSearchPath().path : null}
                     edges={edges}
                     vertices={vertices}
 

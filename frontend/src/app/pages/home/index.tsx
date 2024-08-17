@@ -61,10 +61,8 @@ export function HomePage(): ReactNode {
 
 
     const handleShowRoute = () => {
-        if (whereLocation === null || destinationLocation === null) {
-            alert('Mostrar error quando tentar ver rotas e não selecionar local e destino');
+        if (whereLocation === null || destinationLocation === null)
             return;
-        }
 
         navigate(`/route?origin=${whereLocation.id}&destination=${destinationLocation.id}`, { replace: true });
     }
@@ -141,13 +139,15 @@ export function HomePage(): ReactNode {
                                     )}
                                 </button>
 
-                                <button
-                                    onClick={handleShowRoute}
-                                    className='bg-cyan-100 hover:bg-cyan-300 shadow-shadow text-cyan-950 dark:bg-cyan-300 dark:hover:bg-cyan-400 px-5 py-2 font-medium flex items-center gap-2 rounded-lg'>
-                                    Mostrar rotas
-                                    <ArrowRight
-                                        className='size-5' />
-                                </button>
+                                {destinationLocation !== null && (
+                                    <button
+                                        onClick={handleShowRoute}
+                                        className='bg-cyan-100 hover:bg-cyan-300 shadow-shadow text-cyan-950 dark:bg-cyan-300 dark:hover:bg-cyan-400 px-5 py-2 font-medium flex items-center gap-2 rounded-lg'>
+                                        Mostrar rotas
+                                        <ArrowRight
+                                            className='size-5' />
+                                    </button>
+                                )}
                             </div>
                         )}
                     </div>
