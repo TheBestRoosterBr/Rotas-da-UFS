@@ -13,18 +13,12 @@ import {
 
 import { useNavigate } from 'react-router-dom';
 
-import { Modal } from './blocks/modal';
+import {
+    Location,
+    Modal
+} from './blocks/modal';
 
 import { ThemeMode } from '@/components/themeMode';
-
-
-interface Location {
-    id: number;
-    name: string;
-
-    title?: string;
-    description?: string;
-}
 
 
 export function HomePage(): ReactNode {
@@ -39,27 +33,37 @@ export function HomePage(): ReactNode {
     const [locationsList, setLocationsList] = useState<Location[]>([]);
 
     const [isLoading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
 
 
     useEffect(() => {
         setLoading(true);
 
-        fetch('/api/busca/get_estados')
-            .then((res) => res.json())
-            .then((data) => {
-                const locations = [];
+        fetch('/api/estado')
+            .then((res) => {
+                if (!res.ok) {
+                    setError('Não foi possível buscar a lista de estados!');
+                    return;
+                }
 
-                for (const state of data.estados)
-                    locations.push({
-                        id: parseInt(state.id) + 1,
-                        name: state.nome,
-                    });
+                return res.json();
+            })
+            .then((data: any) => {
+                const locations: Location[] = data.map((location: any): Location => {
+                    return {
+                        id: parseInt(location.id) + 1,
+                        name: location.nome,
+                        title: location.titulo,
+                    };
+                });
 
-                setLoading(false);
                 setLocationsList(locations);
             })
             .catch(() => {
-                console.log('Can\'t fetch data');
+                setError('Ocorreu um erro');
+            })
+            .finally(() => {
+                setLoading(false);
             });
     }, []);
 
@@ -177,7 +181,12 @@ export function HomePage(): ReactNode {
                     title='Nós diga onde você deseja ir'
 
                     currentLocation={destinationLocation}
-                    locations={locationsList} />
+                    locations={locationsList.filter((location) => {
+                        if (whereLocation === null)
+                            return true;
+
+                        return location.id !== whereLocation.id;
+                    })} />
             )}
         </>
     );

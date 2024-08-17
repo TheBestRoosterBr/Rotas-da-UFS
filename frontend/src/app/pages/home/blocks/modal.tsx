@@ -14,11 +14,12 @@ import {
 import { levenshtein } from '@/utils';
 
 
-interface Location {
+export interface Location {
     id: number;
     name: string;
+    title: string;
 
-    title?: string;
+    image?: string;
     description?: string;
 }
 
@@ -36,9 +37,10 @@ interface ModalProps {
 export function Modal(props: ModalProps) {
     const [selectedLocation, setSelectedLocation] = useState<Location | null>(props.currentLocation);
     const [search, setSearch] = useState<string>('');
-    const [loadedLocations, addLoadedLocations] = useState<Location[]>([]);
+    const [loadedLocations, setLoadedLocations] = useState<Location[]>([]);
 
     const [isLoading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
 
     const locations = useMemo(() => {
         return [...props.locations].filter((item) => {
@@ -65,16 +67,32 @@ export function Modal(props: ModalProps) {
         }
 
         setLoading(true);
-        setSelectedLocation(location);
+        fetch(`/api/estado/${location.id}`)
+            .then((res) => {
+                if (!res.json()) {
+                    setError('Não foi possível obter os dados do estado!');
+                    return;
+                }
 
-        fetch(`/api/busca/get_estado?id=${location.id}`)
-            .then((res) => res.json())
-            .then((data) => {
-                addLoadedLocations([...loadedLocations, location])
-                setSelectedLocation(location);
+                return res.json();
+            })
+            .then((data: any) => {
+                const newLocation: Location = data.map((location: any): Location => {
+                    return {
+                        id: parseInt(location.id),
+                        name: location.nome,
+                        title: location.titulo,
+
+                        image: location.imagem,
+                        description: location.descricao,
+                    };
+                });
+
+                setLoadedLocations([...loadedLocations, newLocation]);
+                setSelectedLocation(newLocation);
             })
             .catch(() => {
-                console.log('Can\'t fetch data');
+                setError('Ocorreu um erro');
             })
             .finally(() => {
                 setLoading(false);

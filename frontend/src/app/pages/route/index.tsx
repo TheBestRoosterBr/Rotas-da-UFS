@@ -22,10 +22,17 @@ import {
 } from './blocks/graph';
 
 import { ThemeMode } from '@/components/themeMode';
+import { useSearchParams } from 'react-router-dom';
+
+
+interface SearchPath {
+    search: number;
+    path: number[];
+}
 
 
 export function RoutePage(): ReactNode {
-    const search_names = {
+    const searchNames: { [key: number]: string }  = {
         0: 'Largura',
         1: 'Profundidade',
         2: 'Gulosa',
@@ -33,8 +40,11 @@ export function RoutePage(): ReactNode {
         4: 'A estrela',
     };
 
+
     const [searchAlgorithmHover, setSearchAlgorithmHover] = useState<number>(-1);
     const [searchAlgorithm, setSearchAlgorithm] = useState<number>(-1);
+    const [searchsPathCache, setSearchsPathCache] = useState<SearchPath[]>([]);
+
     const [isRunningRoute, setRunningRoute] = useState<boolean>(false);
 
     const [isLoading, setLoading] = useState<number>(0);
@@ -43,17 +53,66 @@ export function RoutePage(): ReactNode {
     const [vertices, setVertices] = useState<Vertex[]>([]);
     const [edges, setEdges] = useState<Edge[]>([]);
 
+    const [queryParams] = useSearchParams();
+
 
     function handleRunRoute(): void {
+        if (searchAlgorithm === -1) {
+            alert('Select search algorithm')
+            return;
+        }
+
         alert('Implement run route!');
         setRunningRoute(true);
+    }
+
+    function handleAlgorithmSelection(algorithm: number): void {
+        setSearchAlgorithm(algorithm);
+
+        const cached = searchsPathCache.filter((path: SearchPath) => path.search == algorithm);
+        if (cached.length > 0)
+            return;
+
+        setLoading((prev) => prev + 1);
+        fetch(`/api/busca/${searchNames[algorithm]?.toLowerCase().replace(' ', '_')}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    inicio: queryParams.get('origin'),
+                    fim: queryParams.get('destination'),
+                })
+            })
+            .then((res) => {
+                if (!res.ok) {
+                    setError('Não foi possível buscar os dados dos estados!');
+                    return;
+                }
+
+                return res.json();
+            })
+            .then((data: number[]) => {
+                const searchPath: SearchPath = {
+                    search: algorithm,
+                    path: data,
+                }
+
+                setSearchsPathCache([...searchsPathCache, searchPath]);
+            })
+            .catch(() => {
+                setError('Ocorreu um erro');
+            })
+            .finally(() => {
+                setLoading((prev) => prev - 1);
+            });
     }
 
 
     useEffect(() => {
         setLoading((prev) => prev + 1);
 
-        fetch('/api/busca/get_estados')
+        fetch('/api/estado')
             .then((res) => {
                 if (!res.ok) {
                     setError('Não foi possível buscar os dados dos estados!');
@@ -65,10 +124,11 @@ export function RoutePage(): ReactNode {
             .then((data: any) => {
                 const vertices: Vertex[] = data.estados.map((vertex: any): Vertex => {
                     return {
-                        id: vertex.id,
+                        id: parseInt(vertex.id),
+                        title: vertex.titulo,
 
-                        x: Math.random() * 500,
-                        y: Math.random() * 500,
+                        x: parseFloat(vertex.x) ?? Math.random() * 500,
+                        y: parseFloat(vertex.y) ?? Math.random() * 500,
                     };
                 });
 
@@ -85,7 +145,7 @@ export function RoutePage(): ReactNode {
     useEffect(() => {
         setLoading((prev) => prev + 1);
 
-        fetch('/api/busca/get_transicoes')
+        fetch('/api/transicao')
             .then((res) => {
                 if (!res.ok) {
                     setError('Não foi possível buscar os dados das transições!');
@@ -97,8 +157,8 @@ export function RoutePage(): ReactNode {
             .then((data: any) => {
                 const edges: Edge[] = data.transicoes.map((edge: any): Edge => {
                     return {
-                        origin: edge.origem,
-                        destination: edge.destino,
+                        origin: parseInt(edge.origem),
+                        destination: parseInt(edge.destino),
                     };
                 });
 
@@ -132,7 +192,7 @@ export function RoutePage(): ReactNode {
                 {!isRunningRoute && (
                     <div className='absolute z-10 top-[50%] bottom-[50%] flex flex-col items-baseline justify-center text-zinc-900 space-y-4'>
                         <button
-                            onClick={() => setSearchAlgorithm(0)}
+                            onClick={() => handleAlgorithmSelection(0)}
                             onMouseEnter={() => setSearchAlgorithmHover(0)}
                             onMouseLeave={() => setSearchAlgorithmHover(-1)}
                             className={`flex items-center px-4 py-1.5 rounded-r-lg ${searchAlgorithm == 0 ? 'border-y border-r border-cyan-300 text-cyan-300' : 'bg-cyan-300'}`}>
@@ -142,12 +202,12 @@ export function RoutePage(): ReactNode {
 
                             {searchAlgorithmHover === 0 && (
                                 <span className='mx-7'>
-                                    {search_names[searchAlgorithmHover]}
+                                    {searchNames[searchAlgorithmHover]}
                                 </span>
                             )}
                         </button>
                         <button
-                            onClick={() => setSearchAlgorithm(1)}
+                            onClick={() => handleAlgorithmSelection(1)}
                             onMouseEnter={() => setSearchAlgorithmHover(1)}
                             onMouseLeave={() => setSearchAlgorithmHover(-1)}
                             className={`flex items-center px-4 py-1.5 rounded-r-lg ${searchAlgorithm == 1 ? 'border-y border-r border-cyan-300 text-cyan-300' : 'bg-cyan-300'}`}>
@@ -157,12 +217,12 @@ export function RoutePage(): ReactNode {
 
                             {searchAlgorithmHover === 1 && (
                                 <span className='mx-7'>
-                                    {search_names[searchAlgorithmHover]}
+                                    {searchNames[searchAlgorithmHover]}
                                 </span>
                             )}
                         </button>
                         <button
-                            onClick={() => setSearchAlgorithm(2)}
+                            onClick={() => handleAlgorithmSelection(2)}
                             onMouseEnter={() => setSearchAlgorithmHover(2)}
                             onMouseLeave={() => setSearchAlgorithmHover(-1)}
                             className={`flex items-center px-4 py-1.5 rounded-r-lg ${searchAlgorithm == 2 ? 'border-y border-r border-cyan-300 text-cyan-300' : 'bg-cyan-300'}`}>
@@ -172,12 +232,12 @@ export function RoutePage(): ReactNode {
 
                             {searchAlgorithmHover === 2 && (
                                 <span className='mx-7'>
-                                    {search_names[searchAlgorithmHover]}
+                                    {searchNames[searchAlgorithmHover]}
                                 </span>
                             )}
                         </button>
                         <button
-                            onClick={() => setSearchAlgorithm(3)}
+                            onClick={() => handleAlgorithmSelection(3)}
                             onMouseEnter={() => setSearchAlgorithmHover(3)}
                             onMouseLeave={() => setSearchAlgorithmHover(-1)}
                             className={`flex items-center px-4 py-1.5 rounded-r-lg ${searchAlgorithm == 3 ? 'border-y border-r border-cyan-300 text-cyan-300' : 'bg-cyan-300'}`}>
@@ -187,12 +247,12 @@ export function RoutePage(): ReactNode {
 
                             {searchAlgorithmHover === 3 && (
                                 <span className='mx-7'>
-                                    {search_names[searchAlgorithmHover]}
+                                    {searchNames[searchAlgorithmHover]}
                                 </span>
                             )}
                         </button>
                         <button
-                            onClick={() => setSearchAlgorithm(4)}
+                            onClick={() => handleAlgorithmSelection(4)}
                             onMouseEnter={() => setSearchAlgorithmHover(4)}
                             onMouseLeave={() => setSearchAlgorithmHover(-1)}
                             className={`flex items-center px-4 py-1.5 rounded-r-lg ${searchAlgorithm == 4 ? 'border-y border-r border-cyan-300 text-cyan-300' : 'bg-cyan-300'}`}>
@@ -202,7 +262,7 @@ export function RoutePage(): ReactNode {
 
                             {searchAlgorithmHover === 4 && (
                                 <span className='mx-7'>
-                                    {search_names[searchAlgorithmHover]}
+                                    {searchNames[searchAlgorithmHover]}
                                 </span>
                             )}
                         </button>
@@ -213,8 +273,8 @@ export function RoutePage(): ReactNode {
                     edges={edges}
                     vertices={vertices}
 
-                    origin={parseInt(locations.get('origin')!)}
-                    destination={parseInt(locations.get('destination')!)}
+                    origin={parseInt(queryParams.get('origin')!)}
+                    destination={parseInt(queryParams.get('destination')!)}
 
                     className='flex-1' />
             </main>
