@@ -1,4 +1,4 @@
-from Haversine import heuristica
+from backend.graphToolsVol2.Haversine import heuristica
 
 
 class BuscaGulosa:
