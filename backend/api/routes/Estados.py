@@ -12,8 +12,8 @@ PATH_DATA = '../Mapa/custo.csv'
 def get_estados():
     reader = Reader(PATH_MAPA, PATH_DATA)
     estados = reader.estados
-    return jsonify([{'id': estado.id, 'nome': estado.nome, 'titulo': estado.nome_completo} for
-                    estado in estados])
+    return jsonify([{'id': estado.id, 'nome': estado.nome, 'titulo': estado.nome_completo,
+                    'x': estado.latitude, 'y': estado.longitude, } for estado in estados])
 
 
 @router.route('/transicao', methods=['GET'])

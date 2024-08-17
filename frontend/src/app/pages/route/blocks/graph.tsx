@@ -42,6 +42,7 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
     const [startDrag, setStartDrag] = useState({ x: 0, y: 0 });
 
     const svgRef = useRef<SVGSVGElement | null>(null);
+    const animationRef = useRef<number | null>(null);
 
 
     const handleMouseDown = (event: MouseEvent<SVGSVGElement>): void => {
@@ -79,6 +80,33 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
         event.currentTarget.style.cursor = 'default';
     };
 
+    const animateToOffset = ({ x, y }: { x: number, y: number }) => {
+        const animationStep = () => {
+            setOffset((prev) => {
+                const newX = prev.x + (x - prev.x) * 0.1;
+                const newY = prev.y + (y - prev.y) * 0.1;
+
+                if (Math.abs(newX - x) < 0.1 && Math.abs(newY - y) < 0.1)
+                    return {
+                        x: x,
+                        y: y,
+                    };
+
+                return {
+                    x: newX,
+                    y: newY,
+                };
+            });
+
+            animationRef.current = requestAnimationFrame(animationStep);
+        };
+
+        if (animationRef.current !== null)
+            cancelAnimationFrame(animationRef.current);
+
+        animationRef.current = requestAnimationFrame(animationStep);
+    };
+
 
     useEffect(() => {
         const svg: SVGSVGElement | null = svgRef.current;
@@ -100,6 +128,9 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
             svg.removeEventListener('mousemove', localHandleMouseMove);
             svg.removeEventListener('mouseup', localHandleMouseUp);
             svg.removeEventListener('mouseleave', localHandleMouseUp);
+
+            if (animationRef.current !== null)
+                cancelAnimationFrame(animationRef.current);
         };
     }, [isDragging, startDrag]);
 
@@ -108,7 +139,7 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
         if (props.location === null) {
             scale.current = 2;
 
-            setOffset({
+            animateToOffset({
                 x: 0,
                 y: 0,
             })
@@ -126,7 +157,7 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
         const { width, height } = svgRef.current?.getBoundingClientRect();
         const vertex = props.vertices.find((vertex) => vertex.id == props.location);
 
-        setOffset({
+        animateToOffset({
             x: (width / 2) - (vertex!.x * scale.current),
             y: (height / 2) - (vertex!.y * scale.current),
         });
@@ -148,7 +179,10 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
                         x2={props.vertices[edge.destination]?.x}
                         y2={props.vertices[edge.destination]?.y}
 
-                        stroke='white' />
+                        className={props.path !== null && props.path.some((id) => id == edge.origin || id == edge.destination) ?
+                            'text-cyan-300' : 'text-zinc-600'}
+
+                        stroke='currentColor' />
                 ))}
 
                 {props.vertices.map((vertex) => {
@@ -165,7 +199,8 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
 
                             fill='currentColor'
 
-                            className='text-zinc-600' />
+                            className={props.path !== null && props.path.some((id) => id == vertex.id) ?
+                               'text-cyan-300' : 'text-zinc-600'} />
                     );
                 })}
             </g>
