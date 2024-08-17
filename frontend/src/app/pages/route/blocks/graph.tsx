@@ -21,12 +21,14 @@ export interface Edge {
 }
 
 interface GraphViewportProps {
-    vertices: Vertex[];
     edges: Edge[];
+    vertices: Vertex[];
 
     origin: number;
-    location: number | null;
     destination: number;
+
+    path: number[] | null;
+    location: number | null;
 
     className?: string;
 }
@@ -43,9 +45,6 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
 
 
     const handleMouseDown = (event: MouseEvent<SVGSVGElement>): void => {
-        if (props.location !== null)
-            return;
-
         setIsDragging(true);
         setStartDrag({ x: event.clientX, y: event.clientY });
 
@@ -53,7 +52,7 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
     };
 
     const handleMouseMove = (event: MouseEvent<SVGSVGElement>): void => {
-        if (isDragging && props.location === null) {
+        if (isDragging) {
             const dx = event.clientX - startDrag.x;
             const dy = event.clientY - startDrag.y;
             setOffset((prev) => ({ x: prev.x + dx, y: prev.y + dy }));
@@ -62,12 +61,8 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
     };
 
     const handleMouseUp = (event: MouseEvent<SVGSVGElement>): void => {
-        event.currentTarget.style.cursor = 'default';
-
-        if (props.location !== null)
-            return;
-
         setIsDragging(false);
+        event.currentTarget.style.cursor = 'default';
     };
 
 

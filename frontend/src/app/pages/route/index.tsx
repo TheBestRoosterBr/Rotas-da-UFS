@@ -288,6 +288,7 @@ export function RoutePage(): ReactNode {
                 )}
 
                 <GraphViewport
+                    path={searchAlgorithm > -1 ? searchsPathCache[searchAlgorithm]!.path : null}
                     edges={edges}
                     vertices={vertices}
 
