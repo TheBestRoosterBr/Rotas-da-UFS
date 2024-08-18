@@ -6,6 +6,8 @@ from graphToolsVol2.BuscaEmProfundidade import BuscaEmProfundidade
 from graphToolsVol2.BuscaEmLargura import BuscaEmLargura
 from graphToolsVol2.BuscaGulosa import BuscaGulosa
 
+from backend.graphToolsVol2.BuscaCustoUniforme import BuscaCustoUniforme
+
 router = Blueprint('busca', __name__, url_prefix='/busca')
 
 PATH_MAPA = '../Mapa/mapa.jff'
@@ -75,12 +77,14 @@ def custo_uniform():
     data = request.json
     ini = data['inicio']
     f = data['fim']
+    print(ini, f)
     reader = Reader(PATH_MAPA, PATH_DATA)
-    busca = custo_uniform()
+    busca = BuscaCustoUniforme()
     estados = reader.estados
     inicio = next((estado for estado in estados if estado.id == ini), None)
     fim = next((estado for estado in estados if estado.id == f), None)
-    busca.busca(reader.graph, inicio, fim)
+    print(inicio, fim)
+    busca.buscar(reader.graph, inicio, fim)
     return jsonify([estado.id for estado in busca.caminho]), 200
 
 
