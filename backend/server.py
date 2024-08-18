@@ -59,8 +59,11 @@ def find_git_directory(start_path):
 
 def install_pre_commit_hook():
     hook_code = """#!/bin/sh
-if git diff --cached --name-only '*.py' | xargs grep -q 'import backend.'; then
+files_with_import=$(git diff --cached --name-only '*.py' | xargs grep -lE '^(import backend\\.|from backend\\.)')
+
+if [ -n "$files_with_import" ]; then
     echo "Erro: dar commit com 'import backend.' não é permitido!"
+    echo "$files_with_import"
     exit 1
 fi
 """
