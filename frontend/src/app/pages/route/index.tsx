@@ -74,6 +74,8 @@ export function RoutePage(): ReactNode {
         }
 
         setRunningRoute(true);
+        setOnFim(false);
+        setOnInicio(true);
         setLocation(parseInt(queryParams.get('origin')!));
     }
 
