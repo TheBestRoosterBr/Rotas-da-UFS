@@ -72,7 +72,7 @@ def busca_gulosa():
     return jsonify([estado.id for estado in busca.caminho]), 200
 
 
-@router.route('/custo_uniform', methods=['POST'])
+@router.route('/custo_uniforme', methods=['POST'])
 def custo_uniform():
     data = request.json
     ini = data['inicio']

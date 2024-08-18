@@ -35,7 +35,7 @@ interface GraphViewportProps {
 
 
 export function GraphViewport(props: GraphViewportProps): ReactNode {
-    const scale = useRef<number>(2);
+    const scale = useRef<number>(1);
     const [offset, setOffset] = useState({ x: 0, y: 0 });
 
     const [isDragging, setIsDragging] = useState(false);
@@ -186,23 +186,31 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
                 ))}
 
                 {props.vertices.map((vertex) => {
-                    return (
+                return (
+                    <g key={vertex.id}>
                         <circle
-                            key={vertex.id}
-
-                            r={10}
+                            r={5}
                             cx={vertex.x}
                             cy={vertex.y}
-
                             stroke='white'
-                            strokeWidth={2}
-
+                            strokeWidth={1}
                             fill='currentColor'
-
                             className={props.path !== null && props.path.some((id) => id == vertex.id) ?
-                               'text-cyan-300' : 'text-zinc-600'} />
-                    );
-                })}
+                                'text-cyan-300' : 'text-zinc-600'}
+                        />
+                        <text
+                            x={vertex.x}
+                            y={vertex.y - 10} // Ajuste o valor para mover o texto para cima ou para baixo
+                            fontSize="8px"
+                            fill="white"
+                            dominantBaseline="middle"
+                        >
+                            {vertex.title}
+                        </text>
+                    </g>
+                );
+            })}
+
             </g>
         </svg>
     );

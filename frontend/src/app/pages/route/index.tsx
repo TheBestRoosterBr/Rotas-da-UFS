@@ -5,6 +5,7 @@ import {
 } from 'react';
 
 import {
+    ArrowCircleLeft,
     ArrowRight,
     ArrowsHorizontal,
     HandPalm,
@@ -23,7 +24,8 @@ import {
 
 import { ThemeMode } from '@/components/themeMode';
 import { useSearchParams } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
+import notification from "../../components/notification";
 
 interface SearchPath {
     search: number;
@@ -32,6 +34,7 @@ interface SearchPath {
 
 
 export function RoutePage(): ReactNode {
+    const navigate = useNavigate();
     const searchNames: { [key: number]: string }  = {
         0: 'Largura',
         1: 'Profundidade',
@@ -53,9 +56,15 @@ export function RoutePage(): ReactNode {
     const [location, setLocation] = useState<number>(-1);
 
     const [queryParams] = useSearchParams();
+    const [showSuccess, setShowSuccess] = useState(false);
 
 
     const getSearchPath = (): SearchPath => searchsPathCache.find((search) => search.search == searchAlgorithm)!;
+
+    const voltar = () => {
+        navigate(`/`, { replace: true });
+    }
+
 
     function handleRunRoute(): void {
         if (searchAlgorithm === -1) {
@@ -75,7 +84,7 @@ export function RoutePage(): ReactNode {
                 break;
 
         if (index + 1 >= path.length) {
-            alert('Possible at destination!');
+            setShowSuccess(true);
             return;
         }
 
@@ -284,15 +293,27 @@ export function RoutePage(): ReactNode {
 
             <footer className='px-6 py-5'>
                 {!isRunningRoute ? (
-                    <button
-                        onClick={handleRunRoute}
-                        className='ml-auto hover:bg-cyan-300 shadow-shadow text-cyan-950 dark:bg-cyan-300 dark:hover:bg-cyan-400 px-5 py-2 font-medium flex items-center gap-2 rounded-lg'>
-                        Iniciar rota
+                    <div className='flex items-center justify-between'>
+                        <button
+                            onClick={() => voltar()}
+                            className='hover:bg-cyan-300 shadow-shadow text-cyan-950 dark:bg-cyan-300 dark:hover:bg-cyan-400 px-5 py-2 font-medium flex items-center gap-2 rounded-lg'>
+                            Voltar
 
-                        <ArrowRight
-                            className='size-5'
-                            />
-                    </button>
+                            <ArrowCircleLeft
+                                weight='duotone'
+                                className='size-5'
+                                />
+                        </button>
+                        <button
+                            onClick={handleRunRoute}
+                            className='ml-auto hover:bg-cyan-300 shadow-shadow text-cyan-950 dark:bg-cyan-300 dark:hover:bg-cyan-400 px-5 py-2 font-medium flex items-center gap-2 rounded-lg'>
+                            Iniciar rota
+
+                            <ArrowRight
+                                className='size-5'
+                                />
+                        </button>
+                    </div>
                 ) : (
                     <div className='flex items-center justify-between'>
                         <button
@@ -315,6 +336,7 @@ export function RoutePage(): ReactNode {
                                 className='size-5'
                                 />
                         </button>
+                        {showSuccess && <notification type="success" title="Chegou ao Destino!" description="Parabéns, você chegou ao destino." />}
                     </div>
                 )}
             </footer>
