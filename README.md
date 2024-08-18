@@ -15,5 +15,8 @@ O grafo foi construído usando medidas reais que transcrevem a experiência real
 
 ![img.png](img.png)
 
-## Execução
-    # para executar o codigo so Deus sabe
+## Execução FRONT END
+    # npm install
+    # npm run
+## Execução BACK END
+    # pyhton server.py
