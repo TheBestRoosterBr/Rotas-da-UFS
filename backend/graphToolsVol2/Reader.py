@@ -3,6 +3,7 @@ from backend.graphToolsVol2.Estado import Estado
 from backend.graphToolsVol2.Grafo import Grafo
 from backend.graphToolsVol2.Transicao import Transicao
 import pandas as pd
+import math
 
 
 def conversor(original_string):
@@ -40,7 +41,16 @@ class Reader:
                     if state.tag == 'state':
                         id = int(state.attrib['id'])
                         name = state.attrib['name']
+                        x = 0
+                        y = 0
+                        for position in state:
+                            if position.tag == 'x':
+                                x = position.text
+                            if position.tag == 'y':
+                                y = position.text
                         estado = Estado(id, name)
+                        estado.x = conversor(x)
+                        estado.y = conversor(y)
                         self.estados.append(estado)
                         # Adiciona o objeto Estado ao mapeamento pelo seu ID
                         id_to_estado[id] = estado
