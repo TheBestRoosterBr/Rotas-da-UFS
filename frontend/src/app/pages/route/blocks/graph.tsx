@@ -187,20 +187,20 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
 
                 {props.vertices.map((vertex) => {
                     return (
-                        <circle
-                            key={vertex.id}
-
-                            r={10}
-                            cx={vertex.x}
-                            cy={vertex.y}
-
-                            stroke='white'
-                            strokeWidth={2}
-
-                            fill='currentColor'
-
-                            className={props.path !== null && props.path.some((id) => id == vertex.id) ?
-                               'text-cyan-300' : 'text-zinc-600'} />
+                        <g key={vertex.id}>
+                            <circle
+                                r={10}
+                                cx={vertex.x}
+                                cy={vertex.y}
+                                stroke='white'
+                                strokeWidth={2}
+                                fill='currentColor'
+                                className={props.path !== null && props.path.some((id) => id == vertex.id) ? 'text-cyan-300' : 'text-zinc-600'}
+                            />
+                            <text x={vertex.x} y={vertex.y + 5} textAnchor="middle" fill="white" stroke="black" fontWeight="300" fontSize="12px" strokeWidth="3" paint-order="stroke">
+                                {vertex.title}
+                            </text>
+                        </g>
                     );
                 })}
             </g>
