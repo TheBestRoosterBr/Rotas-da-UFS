@@ -177,7 +177,9 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
                         x2={props.vertices[edge.destination]?.x}
                         y2={props.vertices[edge.destination]?.y}
 
-                        className={props.path !== null && props.path.some((id) => id == edge.origin || id == edge.destination) ?
+                        className={props.path !== null
+                                && props.path.some((id) => id == edge.origin)
+                                && props.path.some((id) => id == edge.destination) ?
                             'text-cyan-300' : 'text-zinc-600'}
 
                         stroke='currentColor' />
