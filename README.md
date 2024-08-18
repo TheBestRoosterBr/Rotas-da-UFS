@@ -16,7 +16,9 @@ O grafo foi construído usando medidas reais que transcrevem a experiência real
 ![img.png](img.png)
 
 ## Execução FRONT END
-    # npm install
-    # npm run
+    $ npm install
+    $ npm run start:dev
+
 ## Execução BACK END
-    # pyhton server.py
+    $ pip install -r requirements.txt
+    $ python server.py
