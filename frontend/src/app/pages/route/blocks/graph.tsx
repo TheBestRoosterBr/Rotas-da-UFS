@@ -166,7 +166,7 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
     return (
         <svg
             ref={svgRef}
-            className={`${props.className ?? ''}`}>
+            className={`${props.className ?? ''} select-none`}>
             <g transform={`translate(${offset.x}, ${offset.y}) scale(${scale.current})`}>
                 {props.edges.map((edge, index: number) => (
                     <line
