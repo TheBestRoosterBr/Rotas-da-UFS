@@ -46,9 +46,6 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
 
 
     const handleMouseDown = (event: MouseEvent<SVGSVGElement>): void => {
-        if (props.location !== null)
-            return;
-
         setIsDragging(true);
         setStartDrag({
             x: event.clientX,
@@ -59,20 +56,21 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
     };
 
     const handleMouseMove = (event: MouseEvent<SVGSVGElement>): void => {
-        if (isDragging) {
-            const dx = event.clientX - startDrag.x;
-            const dy = event.clientY - startDrag.y;
+        if (!isDragging)
+            return;
 
-            setOffset((prev) => ({
-                x: prev.x + dx,
-                y: prev.y + dy
-            }));
+        const dx = event.clientX - startDrag.x;
+        const dy = event.clientY - startDrag.y;
 
-            setStartDrag({
-                x: event.clientX,
-                y: event.clientY
-            });
-        }
+        setOffset((prev) => ({
+            x: prev.x + dx,
+            y: prev.y + dy
+        }));
+
+        setStartDrag({
+            x: event.clientX,
+            y: event.clientY
+        });
     };
 
     const handleMouseUp = (event: MouseEvent<SVGSVGElement>): void => {
@@ -179,7 +177,9 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
                         x2={props.vertices[edge.destination]?.x}
                         y2={props.vertices[edge.destination]?.y}
 
-                        className={props.path !== null && props.path.some((id) => id == edge.origin || id == edge.destination) ?
+                        className={props.path !== null
+                                && props.path.some((id) => id == edge.origin)
+                                && props.path.some((id) => id == edge.destination) ?
                             'text-cyan-300' : 'text-zinc-600'}
 
                         stroke='currentColor' />

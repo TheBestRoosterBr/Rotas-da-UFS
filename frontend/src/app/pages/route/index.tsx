@@ -152,9 +152,8 @@ export function RoutePage(): ReactNode {
     useEffect(() => {
         fetch('/api/transicao')
             .then((res) => {
-                if (!res.ok) {
+                if (!res.ok)
                     return;
-                }
 
                 return res.json();
             })

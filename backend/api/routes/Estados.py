@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask.blueprints import Blueprint
-from backend.graphToolsVol2.Reader import Reader
+from graphToolsVol2.Reader import Reader
 
 router = Blueprint('Estados', __name__)
 
@@ -13,7 +13,7 @@ def get_estados():
     reader = Reader(PATH_MAPA, PATH_DATA)
     estados = reader.estados
     return jsonify([{'id': estado.id, 'nome': estado.nome, 'titulo': estado.nome_completo,
-                    'x': estado.latitude, 'y': estado.longitude, } for estado in estados])
+                    'x': estado.x, 'y': estado.y, } for estado in estados])
 
 
 @router.route('/transicao', methods=['GET'])
@@ -33,7 +33,7 @@ def get_estado(id):
         return jsonify({"error": "nao tem esse estado"}), 404
     return jsonify({'id': estado.id, 'nome': estado.nome, 'titulo': estado.nome_completo,
                     'descricao': estado.descricao, 'filtros': estado.filtros,
-                    'x': estado.latitude, 'y': estado.longitude,
+                    'x': estado.x, 'y': estado.y,
                     'imagem': estado.nome + ".png"}), 200
 
 

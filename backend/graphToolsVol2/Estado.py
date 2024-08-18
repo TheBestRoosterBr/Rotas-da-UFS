@@ -5,6 +5,8 @@ class Estado:
         self.nome_completo = ""
         self.latitude = 0
         self.longitude = 0
+        self.x = 0
+        self.y = 0
         self.descricao = ""
         self.filtros = []
         self.anterior = None
@@ -14,4 +16,4 @@ class Estado:
         visitor.visit(self)
 
     def __lt__(self, other):
-        return self.id < other.id
+        return self.custo < other.custo
