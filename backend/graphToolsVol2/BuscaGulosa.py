@@ -1,5 +1,4 @@
-from backend.graphToolsVol2.Haversine import heuristica
-
+from graphToolsVol2.Haversine import heuristica
 
 class BuscaGulosa:
     def __init__(self):

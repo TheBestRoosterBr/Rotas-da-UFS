@@ -1,4 +1,4 @@
-from backend.graphToolsVol2.Haversine import heuristica
+from graphToolsVol2.Haversine import heuristica
 
 
 class BuscaAEstrela:

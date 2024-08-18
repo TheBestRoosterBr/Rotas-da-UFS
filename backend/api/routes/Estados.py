@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask.blueprints import Blueprint
-from backend.graphToolsVol2.Reader import Reader
+from graphToolsVol2.Reader import Reader
 
 router = Blueprint('Estados', __name__)
 

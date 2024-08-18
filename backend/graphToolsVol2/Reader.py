@@ -1,9 +1,8 @@
 import xml.etree.ElementTree as ET
-from backend.graphToolsVol2.Estado import Estado
-from backend.graphToolsVol2.Grafo import Grafo
-from backend.graphToolsVol2.Transicao import Transicao
+from graphToolsVol2.Estado import Estado
+from graphToolsVol2.Grafo import Grafo
+from graphToolsVol2.Transicao import Transicao
 import pandas as pd
-import math
 
 
 def conversor(original_string):

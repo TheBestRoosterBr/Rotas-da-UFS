@@ -1,6 +1,6 @@
-from BuscaAEstrela import BuscaAEstrela
-from BuscaGulosa import BuscaGulosa
-from Reader import Reader
+from graphToolsVol2.BuscaAEstrela import BuscaAEstrela
+from graphToolsVol2.BuscaGulosa import BuscaGulosa
+from graphToolsVol2.Reader import Reader
 
 
 class GraphTool:
