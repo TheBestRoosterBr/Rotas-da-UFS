@@ -72,15 +72,12 @@ export function Modal(props: ModalProps) {
                 return res.json();
             })
             .then((data: any) => {
-                const imagePathPrefix = 'src/app/Imagens/';
-                const fullImagePath = `${imagePathPrefix}${data.imagem}`;
-
                 const newLocation: Location = {
                         id: parseInt(data.id),
                         name: data.nome,
                         title: data.titulo,
 
-                        image: fullImagePath,
+                        image: `/public/imgs/${data.imagem}`,
                         description: data.descricao,
                 };
 
