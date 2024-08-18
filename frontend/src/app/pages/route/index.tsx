@@ -5,7 +5,7 @@ import {
 } from 'react';
 
 import {
-    ArrowCircleLeft,
+    ArrowCircleLeft, ArrowLeft,
     ArrowRight,
     ArrowsHorizontal,
     HandPalm,
@@ -49,6 +49,8 @@ export function RoutePage(): ReactNode {
     const [searchsPathCache, setSearchsPathCache] = useState<SearchPath[]>([]);
 
     const [isRunningRoute, setRunningRoute] = useState<boolean>(false);
+    const [isOnInicio, setOnInicio] = useState<boolean>(true);
+    const [isOnFim, setOnFim] = useState<boolean>(false);
 
     const [vertices, setVertices] = useState<Vertex[]>([]);
     const [edges, setEdges] = useState<Edge[]>([]);
@@ -83,13 +85,38 @@ export function RoutePage(): ReactNode {
             if (path[index] == location)
                 break;
 
+        if(index == path.length - 2){
+            setOnFim(true);
+        }
         if (index + 1 >= path.length) {
             setShowSuccess(true);
             return;
         }
 
+        setOnInicio(false);
         setLocation(path[index + 1]!);
     }
+
+    function handleLastLocation(): void {
+        const path = getSearchPath().path;
+
+        let index = Infinity;
+        for (index of path.keys())
+            if (path[index] == location)
+                break;
+
+        if(index <= 1){
+            setOnInicio(true);
+        }
+
+        if (index -1 < 0) {
+            return;
+        }
+        setOnFim(false);
+        setLocation(path[index -1]!);
+    }
+
+
 
     function handleAlgorithmSelection(algorithm: number): void {
         const cached = searchsPathCache.filter((search: SearchPath) => search.search == algorithm);
@@ -144,7 +171,8 @@ export function RoutePage(): ReactNode {
                     return {
                         id: vertex.id,
                         title: vertex.titulo,
-
+                        image: vertex.imagem,
+                        selected: false,
                         x: parseFloat(vertex.x),
                         y: parseFloat(vertex.y),
                     };
@@ -324,19 +352,32 @@ export function RoutePage(): ReactNode {
                             <HandPalm
                                 weight='duotone'
                                 className='size-5'
-                                />
+                            />
                         </button>
+                        <div className='flex items-center justify-items-center'>
 
-                        <button
-                            onClick={handleNextLocation}
-                            className='ml-auto hover:bg-cyan-300 shadow-shadow text-cyan-950 dark:bg-cyan-300 dark:hover:bg-cyan-400 px-5 py-2 font-medium flex items-center gap-2 rounded-lg'>
-                            Próximo local
+                            {!isOnInicio ? (<button
+                                onClick={handleLastLocation}
+                                className='ml-auto hover:bg-cyan-300 shadow-shadow text-cyan-950 dark:bg-cyan-300 dark:hover:bg-cyan-400 px-5 py-2 font-medium flex items-center gap-2 rounded-lg mr-3'>
+                                Anterior
 
-                            <ArrowRight
-                                className='size-5'
+                                <ArrowLeft
+                                    className='size-5'
                                 />
-                        </button>
-                        {showSuccess && <notification type="success" title="Chegou ao Destino!" description="Parabéns, você chegou ao destino." />}
+                            </button>) : null}
+                            {!isOnFim ? (
+                            <button
+                                onClick={handleNextLocation}
+                                className='ml-auto hover:bg-cyan-300 shadow-shadow text-cyan-950 dark:bg-cyan-300 dark:hover:bg-cyan-400 px-5 py-2 font-medium flex items-center gap-2 rounded-lg'>
+                                Próximo local
+
+                                <ArrowRight
+                                    className='size-5'
+                                />
+                            </button> ) : null }
+                        </div>
+                        {showSuccess && <notification type="success" title="Chegou ao Destino!"
+                                                      description="Parabéns, você chegou ao destino."/>}
                     </div>
                 )}
             </footer>

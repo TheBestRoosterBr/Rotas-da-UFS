@@ -72,12 +72,15 @@ export function Modal(props: ModalProps) {
                 return res.json();
             })
             .then((data: any) => {
+                const imagePathPrefix = '../imagens/';
+                const fullImagePath = `${imagePathPrefix}${data.imagem}`;
+
                 const newLocation: Location = {
                         id: parseInt(data.id),
                         name: data.nome,
                         title: data.titulo,
 
-                        image: data.imagem,
+                        image: fullImagePath,
                         description: data.descricao,
                 };
 
@@ -203,7 +206,9 @@ export function Modal(props: ModalProps) {
                             {/* Location informations */}
                             <div className='flex flex-1 h-full flex-col items-center space-y-1.5'>
                                 {/* Location image */}
-                                <div className='w-56 h-44 bg-zinc-400' />
+                                <div className='w-56 h-44 bg-zinc-400'>
+                                    <img src={selectedLocation.image} alt={`Image of ${selectedLocation.title ?? selectedLocation.name}`} className='w-full h-full object-cover' />
+                                </div>
 
                                 {/* Horizontal separator */}
                                 <div className='w-48 h-px bg-zinc-600' />

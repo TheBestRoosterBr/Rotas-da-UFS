@@ -5,8 +5,7 @@ from graphToolsVol2.BuscaAEstrela import BuscaAEstrela
 from graphToolsVol2.BuscaEmProfundidade import BuscaEmProfundidade
 from graphToolsVol2.BuscaEmLargura import BuscaEmLargura
 from graphToolsVol2.BuscaGulosa import BuscaGulosa
-
-from backend.graphToolsVol2.BuscaCustoUniforme import BuscaCustoUniforme
+from graphToolsVol2.BuscaCustoUniforme import BuscaCustoUniforme
 
 router = Blueprint('busca', __name__, url_prefix='/busca')
 
@@ -84,7 +83,7 @@ def custo_uniform():
     inicio = next((estado for estado in estados if estado.id == ini), None)
     fim = next((estado for estado in estados if estado.id == f), None)
     print(inicio, fim)
-    busca.buscar(reader.graph, inicio, fim)
+    busca.busca(reader.graph, inicio, fim)
     return jsonify([estado.id for estado in busca.caminho]), 200
 
 

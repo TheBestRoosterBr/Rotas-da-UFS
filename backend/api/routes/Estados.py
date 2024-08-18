@@ -13,7 +13,7 @@ def get_estados():
     reader = Reader(PATH_MAPA, PATH_DATA)
     estados = reader.estados
     return jsonify([{'id': estado.id, 'nome': estado.nome, 'titulo': estado.nome_completo,
-                    'x': estado.x, 'y': estado.y, } for estado in estados])
+                     'x': estado.x, 'y': estado.y, 'imagem': estado.nome_completo + '.jpeg'} for estado in estados])
 
 
 @router.route('/transicao', methods=['GET'])
@@ -34,7 +34,7 @@ def get_estado(id):
     return jsonify({'id': estado.id, 'nome': estado.nome, 'titulo': estado.nome_completo,
                     'descricao': estado.descricao, 'filtros': estado.filtros,
                     'x': estado.x, 'y': estado.y,
-                    'imagem': estado.nome + ".png"}), 200
+                    'imagem': estado.nome + ".jpeg"}), 200
 
 
 @router.route('/filtro', methods=['GET'])

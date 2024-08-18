@@ -10,7 +10,8 @@ import {
 export interface Vertex {
     id: number;
     title: string;
-
+    image: string;
+    selected: boolean;
     x: number;
     y: number;
 }
@@ -135,7 +136,7 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
     useEffect(() => {
         // Following a route?
         if (props.location === null) {
-            scale.current = 2;
+            scale.current = 1;
 
             animateToOffset({
                 x: 0,
@@ -207,6 +208,18 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
                         >
                             {vertex.title}
                         </text>
+                        {/* Embedding the image inside the circle */}
+                            {vertex.image && (
+                                <image
+                                    href={'src/app/Imagens/' + vertex.image}
+                                    width="24"
+                                    height="24"
+                                    x={vertex.x - 12}
+                                    y={vertex.y - 12}
+                                    preserveAspectRatio="xMidYMid slice"
+                                />
+                            )
+                        }
                     </g>
                 );
             })}

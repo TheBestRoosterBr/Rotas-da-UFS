@@ -1,5 +1,6 @@
 from graphToolsVol2.Haversine import heuristica
 
+
 class BuscaGulosa:
     def __init__(self):
         self.caminho = []
@@ -11,22 +12,24 @@ class BuscaGulosa:
         self.custo = 0
         self.visitados = set()
 
-        atual = inicio
-        self.caminho.append(atual)
-        self.visitados.add(atual)
+        def fds(atual):
+            if atual not in self.visitados:
+                self.visitados.add(atual)
+                self.caminho.append(atual)
 
-        while atual != objetivo:
-            transicoes_validas = [t for t in grafo.transicoes if t.origem == atual and t.destino not in self.visitados]
+                if atual == objetivo:
+                    return True
 
-            if not transicoes_validas:
-                return None
-            # Escolhe a transição com o menor valor heurístico (custo estimado até o objetivo)
-            proxima_transicao = min(transicoes_validas, key=lambda t: heuristica(objetivo, t.destino))
+                vizinhos = [t for t in grafo.transicoes if t.origem == atual]
+                vizinhos.sort(key=lambda t: heuristica(t.destino, objetivo))
 
-            atual = proxima_transicao.destino
-            self.caminho.append(atual)
-            self.custo += float(proxima_transicao.distancia)
-            self.visitados.add(atual)
+                for v in vizinhos:
+                    if v not in self.visitados and fds(v.destino):
+                        return True
+                self.caminho.pop()
+                return False
+
+        fds(inicio)
         return self.caminho
 
     def ordem_expansao_nodos(self):
