@@ -46,9 +46,6 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
 
 
     const handleMouseDown = (event: MouseEvent<SVGSVGElement>): void => {
-        if (props.location !== null)
-            return;
-
         setIsDragging(true);
         setStartDrag({
             x: event.clientX,
@@ -59,7 +56,7 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
     };
 
     const handleMouseMove = (event: MouseEvent<SVGSVGElement>): void => {
-        if (!isDragging || props.location !== null)
+        if (!isDragging)
             return;
 
         const dx = event.clientX - startDrag.x;
