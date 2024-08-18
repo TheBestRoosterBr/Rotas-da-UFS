@@ -37,10 +37,10 @@ interface GraphViewportProps {
 
 export function GraphViewport(props: GraphViewportProps): ReactNode {
     const scale = useRef<number>(1);
-    const [offset, setOffset] = useState({ x: 0, y: 0 });
+    const [offset, setOffset] = useState({x: 0, y: 0});
 
     const [isDragging, setIsDragging] = useState(false);
-    const [startDrag, setStartDrag] = useState({ x: 0, y: 0 });
+    const [startDrag, setStartDrag] = useState({x: 0, y: 0});
 
     const svgRef = useRef<SVGSVGElement | null>(null);
     const animationRef = useRef<number | null>(null);
@@ -79,7 +79,7 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
         event.currentTarget.style.cursor = 'default';
     };
 
-    const animateToOffset = ({ x, y }: { x: number, y: number }) => {
+    const animateToOffset = ({x, y}: { x: number, y: number }) => {
         const animationStep = () => {
             setOffset((prev) => {
                 const newX = prev.x + (x - prev.x) * 0.1;
@@ -153,7 +153,7 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
         if (svgRef.current == null)
             return;
 
-        const { width, height } = svgRef.current?.getBoundingClientRect();
+        const {width, height} = svgRef.current?.getBoundingClientRect();
         const vertex = props.vertices.find((vertex) => vertex.id == props.location);
 
         animateToOffset({
@@ -179,50 +179,56 @@ export function GraphViewport(props: GraphViewportProps): ReactNode {
                         y2={props.vertices[edge.destination]?.y}
 
                         className={props.path !== null
-                                && props.path.some((id) => id == edge.origin)
-                                && props.path.some((id) => id == edge.destination) ?
+                        && props.path.some((id) => id == edge.origin)
+                        && props.path.some((id) => id == edge.destination) ?
                             'text-cyan-300' : 'text-zinc-600'}
 
-                        stroke='currentColor' />
+                        stroke='currentColor'/>
                 ))}
 
                 {props.vertices.map((vertex) => {
-                return (
-                    <g key={vertex.id}>
-                        <circle
-                            r={5}
-                            cx={vertex.x}
-                            cy={vertex.y}
-                            stroke='white'
-                            strokeWidth={1}
-                            fill='currentColor'
-                            className={props.path !== null && props.path.some((id) => id == vertex.id) ?
-                                'text-cyan-300' : 'text-zinc-600'}
-                        />
-                        <text
-                            x={vertex.x}
-                            y={vertex.y - 10} // Ajuste o valor para mover o texto para cima ou para baixo
-                            fontSize="8px"
-                            fill="white"
-                            dominantBaseline="middle"
-                        >
-                            {vertex.title}
-                        </text>
-                        {/* Embedding the image inside the circle */}
-                            {vertex.image && (
-                                <image
-                                    href={'src/app/Imagens/' + vertex.image}
-                                    width="24"
-                                    height="24"
-                                    x={vertex.x - 12}
-                                    y={vertex.y - 12}
-                                    preserveAspectRatio="xMidYMid slice"
-                                />
-                            )
-                        }
-                    </g>
-                );
-            })}
+                    return (
+                        <g key={vertex.id}>
+                            <circle
+                                r={10}
+                                cx={vertex.x}
+                                cy={vertex.y}
+                                stroke='white'
+                                strokeWidth={1}
+                                fill='currentColor'
+                                className={props.path !== null && props.path.some((id) => id == vertex.id) ?
+                                    'text-cyan-300' : 'text-zinc-600'}
+                            />
+                            <text
+                                x={vertex.x}
+                                y={vertex.y - 10}
+                                fontSize="8px"
+                                fill="white"
+                                dominantBaseline="middle"
+                            >
+                                {vertex.title}
+                            </text>
+
+                            <defs>
+                                <clipPath id={`circleClip-${vertex.id}`}>
+                                    <circle fill='currentColor' cx={vertex.x} cy={vertex.y} r={9.5}/>
+                                    {/* Ajuste o raio conforme necessário */}
+                                </clipPath>
+                            </defs>
+                            <image
+                                href={'public/imgs/' + vertex.image}
+                                width="30"
+                                height="30"
+                                x={vertex.x - 15}
+                                y={vertex.y - 15}
+                                preserveAspectRatio="xMidYMid meet"
+                                clipPath={`url(#circleClip-${vertex.id})`} // Aplica o caminho de recorte
+                            />
+
+                        </g>
+                    )
+                        ;
+                })}
 
             </g>
         </svg>
