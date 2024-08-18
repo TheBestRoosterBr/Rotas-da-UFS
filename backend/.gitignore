@@ -11,5 +11,3 @@
 **/.env*
 !**/.env*.sample
 
-## Arquivo de walter e sua IDE
-.idea
