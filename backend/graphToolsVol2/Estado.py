@@ -12,3 +12,6 @@ class Estado:
 
     def visit(self, visitor):
         visitor.visit(self)
+
+    def __lt__(self, other):
+        return self.id < other.id
